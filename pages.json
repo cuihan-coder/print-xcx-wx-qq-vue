@@ -1,0 +1,114 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/print/zjzPicPrint",
+			"style": {
+				"navigationBarTitleText": "订单详情",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/index/home",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/print/zjzPicPrint",
+			"style": {
+				"navigationBarTitleText": "证件照打印",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/print/payOk",
+			"style": {
+				"navigationBarTitleText": "文件打印",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/userModule/userInfo",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/print/ehyPicPrint",
+			"style": {
+				"navigationBarTitleText": "图片打印",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/print/dtpPicPrint",
+			"style": {
+				"navigationBarTitleText": "多图片打印",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/print/picPrintEntry",
+			"style": {
+				"navigationBarTitleText": "图片打印",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/print/fczPicPrint",
+			"style": {
+				"navigationBarTitleText": "图片打印",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/print/jhzPicPrint",
+			"style": {
+				"navigationBarTitleText": "图片打印",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/print/cszPicPrint",
+			"style": {
+				"navigationBarTitleText": "图片打印",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/print/hkbPicPrint",
+			"style": {
+				"navigationBarTitleText": "图片打印",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/print/byzPicPrint",
+			"style": {
+				"navigationBarTitleText": "图片打印",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/print/suborder",
+			"style": {
+				"navigationBarTitleText": "文件打印",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/print/payPrint",
+			"style": {
+				"navigationBarTitleText": "支付并打印",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		}
+
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}
