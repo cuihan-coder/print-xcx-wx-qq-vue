@@ -7,21 +7,21 @@
 		<view class="pad-height"></view>
 		<scroll-view class="scroll-view" scroll-y="true" show-scrollbar="false">
 			<scanEquipment></scanEquipment>
-			<view class="item-entry">
+			<view class="item-entry" @click="toPage('/pages/order/suborder')">
 				<image src="http://qswy.com/static/xcximg/home_file@2x.png"></image>
-				<view class="item-entry-font">
+				<view class="item-entry-font" >
 					<view>文件打印</view>
 					<view>微信文档，支持PDF/DOC/XLS/PPT</view>
 				</view>
 			</view>
-			<view class="item-entry">
+			<view class="item-entry" @click="toPage('/pages/print/zjzPicPrint')">
 				<image src="http://qswy.com/static/xcximg/home_certificates@2x.png"></image>
 				<view class="item-entry-font">
 					<view>证件照</view>
 					<view>智能修图 美颜 排版 换红白蓝底</view>
 				</view>
 			</view>
-			<view class="item-entry" @click="`${$store.commit('print/SET_PRINTDIALOGSHOW',true)}`">
+			<view class="item-entry" @click="`${$store.commit('home/SET_PRINTDIALOGSHOW', true)}`">
 				<image src="http://qswy.com/static/xcximg/home_img@2x.png"></image>
 				<view class="item-entry-font">
 					<view>图片打印</view>
@@ -32,6 +32,8 @@
 		</scroll-view>
 		<!-- 选择图片打印弹窗 -->
 		<picPrintSelectDialog :isShow="printDialogShow"></picPrintSelectDialog>
+		<!-- 首屏优惠券弹窗 -->
+		<voucherDialog :isShow="voucherDialogShow"></voucherDialog>
 		<footerMenu></footerMenu>
 	</view>
 </template>
@@ -40,33 +42,49 @@
 import scanEquipment from '../../components/scanEquipment.vue';
 import footerMenu from '../../components/footerMenu.vue';
 import picPrintSelectDialog from '../../components/picPrintSelectDialog.vue';
+import voucherDialog from '../../components/voucher/dialog.vue';
 
 export default {
 	components: {
 		scanEquipment,
 		footerMenu,
-		picPrintSelectDialog
+		picPrintSelectDialog,
+		voucherDialog
 	},
-	computed:{
-		store_printDialogShow(){
-			return this.$store.state.print.printDialogShow
+	computed: {
+		store_printDialogShow() {
+			return this.$store.state.home.printDialogShow;
+		},
+		store_voucherDialogShow() {
+			return this.$store.state.home.voucherDialogShow;
 		}
 	},
-	watch:{
-		store_printDialogShow(val){
-			this.printDialogShow = val
+	watch: {
+		store_printDialogShow(val) {
+			this.printDialogShow = val;
+		},
+		store_voucherDialogShow(val) {
+			this.voucherDialogShow = val;
 		}
 	},
 	data() {
 		return {
 			title: 'Hello',
-			printDialogShow: false
+			printDialogShow: false,
+			voucherDialogShow: false
 		};
 	},
-	async onLoad() {	
-		
+	async onLoad() {
+		//this.$store.commit('home/SET_VOUCHERDIALOGSHOW', true);
 	},
-	methods: {}
+	methods: {
+		toPage(url) {
+			this.$store.commit('home/SET_VOUCHERDIALOGSHOW', false);
+			uni.navigateTo({
+				url: url
+			});
+		}
+	}
 };
 </script>
 
@@ -111,7 +129,7 @@ page {
 	& .pad-height {
 		@include w-h(100%, 20upx);
 	}
-	& .pad-height-50{
+	& .pad-height-50 {
 		@include w-h(100%, 50upx);
 	}
 	& .item-entry {

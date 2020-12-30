@@ -76,7 +76,7 @@ $uni-color-paragraph: #3f536e; // 文章段落颜色
 $uni-font-size-paragraph: 30rpx;
 
 $color-f1: #f1f1f1;
-$color-A4:#A4A4A4;
+$color-A4: #a4a4a4;
 $color-f8: #f8f8f8;
 $color-ff: #ffffff;
 $color-00: #000000;
@@ -90,15 +90,45 @@ $color-FF4646: #ff4646;
 $color-C5: #c5c5c5;
 $color-3985FF: #3985ff;
 $color-A2A3A3: #a2a3a3;
-$color-D7: #D7D7D7;
-$color-B6: #B6B6B6;
-$color-DC: #DCDCDC;
-$color-D2: #D2D2D2;
-$color-F8: #F8F8F8;
+$color-D7: #d7d7d7;
+$color-B6: #b6b6b6;
+$color-DC: #dcdcdc;
+$color-D2: #d2d2d2;
+$color-F8: #f8f8f8;
 $color-87: #878787;
-$zhezhao:rgba(51, 51, 51, 0.85);
+$color-1668FF: #1668ff;
+$color-FF7420: #ff7420;
+$color-FF3434: #ff3434;
+$color-FF8A00: #ff8a00;
+$color-F0: #f0f0f0;
+$color-3F: #3f3f3f;
+$color-91: #9194a1;
+$color-F2: #f2f2f2;
+$color-FF9204: #ff9204;
+$color-282828: #282828;
+$color-90: #909090;
+$color-53C117: #53c117;
+$color-FF5420: #ff5420;
+$color-FF4A5F: #ff4a5f;
+$color-C4: #c4c4c4;
+$color-E8: #e8e8e8;
+$color-22: #222222;
+$color-F6F9FE: #f6f9fe;
+$color-FF2424: #ff2424;
+$color-079A26: #079a26;
+$color-E84033: #e84033;
+$color-FAF6F7: #faf6f7;
+$color-F2AAA6: #f2aaa6;
+$color-E94234: #e94234;
+$color-FFC807: #ffc807;
+$color-78: #787878;
+$color-F9381B: #F9381B;
+$color-2E: #2E2E2E;
+$color-FE7954: #FE7954;
+$color-EB3506: #EB3506;
 
 
+$zhezhao: rgba(51, 51, 51, 0.85);
 
 @mixin center {
 	display: flex;

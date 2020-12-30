@@ -1,11 +1,11 @@
 <template>
 	<view class="dialog" v-if="isShow == true">
-		<view class="background-ceng" @click="closeFc"></view>
-		<view @click="topage('jz')" class="orange-back">
+		<view class="background-ceng" @click="`${$store.commit('home/SET_PRINTDIALOGSHOW', false)}`"></view>
+		<view @click="toPage('/pages/print/dtpPicPrint')" class="orange-back">
 			<view>图片打印至</view>
-			<view>6寸胶纸</view>
+			<view>6寸相纸</view>
 		</view>
-		<view @click="topage('a4')" class="blue-back">
+		<view @click="toPage('/pages/print/picPrintEntry')" class="blue-back">
 			<view>图片打印至</view>
 			<view>A4纸</view>
 		</view>
@@ -21,13 +21,13 @@ export default {
 			default: false
 		}
 	},
-	methods:{
-		topage(){
-			this.$store.commit('print/SET_PRINTDIALOGSHOW',false)
+	methods: {
+		toPage(url) {
+			this.$store.commit('home/SET_PRINTDIALOGSHOW', false);
 			//跳转地址
-		},
-		closeFc(){
-			this.$store.commit('print/SET_PRINTDIALOGSHOW',false)
+			uni.navigateTo({
+				url: url
+			});
 		}
 	}
 };

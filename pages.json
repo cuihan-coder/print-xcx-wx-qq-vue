@@ -1,9 +1,9 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/print/zjzPicPrint",
+			"path": "pages/print/selfPrint",
 			"style": {
-				"navigationBarTitleText": "订单详情",
+				"navigationBarTitleText": "图片打印",
 				"navigationBarBackgroundColor": "#FFFFFF"
 			}
 		},
@@ -13,6 +13,107 @@
 				"navigationStyle": "custom"
 			}
 		},
+		{
+			"path": "pages/userModule/shareFriend",
+			"style": {
+				"navigationBarTitleText": "邀请好友",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/order/orderList",
+			"style": {
+				"navigationBarTitleText": "全部订单",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "跳转",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/print/zjzConfirm",
+			"style": {
+				"navigationBarTitleText": "证件照打印",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/print/zjzUpload",
+			"style": {
+				"navigationBarTitleText": "证件照打印",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/print/sfzPicPrint",
+			"style": {
+				"navigationBarTitleText": "图片打印",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/userModule/topup",
+			"style": {
+				"navigationBarTitleText": "充值",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/order/tksq",
+			"style": {
+				"navigationBarTitleText": "申请退款",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/service/help",
+			"style": {
+				"navigationBarTitleText": "使用帮助",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/userModule/voucher",
+			"style": {
+				"navigationBarTitleText": "优惠券",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		
+		{
+			"path": "pages/service/contact",
+			"style": {
+				"navigationBarTitleText": "联系我们",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/index/activeInfo",
+			"style": {
+				"navigationBarTitleText": "活动详情",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/index/activeList",
+			"style": {
+				"navigationBarTitleText": "活动列表",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/order/orderInfo",
+			"style": {
+				"navigationBarTitleText": "订单详情",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		
 		{
 			"path": "pages/print/zjzPicPrint",
 			"style": {
@@ -90,7 +191,7 @@
 			}
 		},
 		{
-			"path": "pages/print/suborder",
+			"path": "pages/order/suborder",
 			"style": {
 				"navigationBarTitleText": "文件打印",
 				"navigationBarBackgroundColor": "#FFFFFF"
