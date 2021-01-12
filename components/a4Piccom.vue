@@ -153,20 +153,7 @@ export default {
 						let changeH = this.imgW > this.imgH ? this.imgW : this.imgH
 						let ret = a4PicModel[funcName](val, this.pt, changeH, this.rotate);
 						this[playField] = ret;
-						
-						//旋转之下 位置纠偏 pt 的相对位移
-						let { PT_MT, PT_ML } = a4PicModel.rotatingPtFix(this.pt, this.imgW, this.imgH);
-						// this.mt_up_down = PT_MT;
-						// this.ml_up_down = PT_ML;
-						this.printR('上下移动');
-						//pl的相对位移
-						let { PL_MT, PL_ML } = a4PicModel.rotatingPlFix(this.pl, this.imgW, this.imgH,this.moveType);
-						// this.mt_left_right = PL_MT;
-						// this.ml_left_right = PL_ML;
-						this.printR('左右');
-						// 进行合计
-						this.mt =  PT_MT + PL_MT 
-						this.ml = PL_ML + PT_ML
+						this.plAndPtSum()
 						return;
 					}
 					let ret = a4PicModel[funcName](val, this.pt, this.imgH, this.rotate);
@@ -178,15 +165,7 @@ export default {
 					this.moveType = 2
 					if (this.rotate == 90) {
 						//旋转的情况下 图片宽为高
-						let { PL_MT, PL_ML } = a4PicModel.rotatingPlFix(this.pl, this.imgW, this.imgH,this.moveType);
-						// this.mt_left_right = PL_MT;
-						// this.ml_left_right = PL_ML;
-						let { PT_MT, PT_ML } = a4PicModel.rotatingPtFix(this.pt, this.imgW, this.imgH);
-						 // this.mt_up_down = PT_MT;
-						 // this.ml_up_down = PT_ML;
-						this.mt = PL_MT +  PT_MT
-						this.ml = PL_ML + PT_ML
-						this.printR('剧中');
+						this.plAndPtSum()
 					}
 				}
 				if (funcName == 'moveLeft') {
@@ -194,15 +173,7 @@ export default {
 					this[playField] = ret;
 					this.moveType = 1
 					if (this.rotate == 90) {
-						let { PL_MT, PL_ML } = a4PicModel.rotatingPlFix(this.pl, this.imgW, this.imgH,this.moveType);
-						// this.mt_left_right = PL_MT;
-						// this.ml_left_right = PL_ML;
-						let { PT_MT, PT_ML } = a4PicModel.rotatingPtFix(this.pt, this.imgW, this.imgH);
-						 // this.mt_up_down = PT_MT;
-						 // this.ml_up_down = PT_ML;
-						this.mt = PL_MT +  PT_MT
-						this.ml = PL_ML + PT_ML
-						this.printR('左');
+						this.plAndPtSum()
 					}
 				}
 				if (funcName == 'moveRight') {
@@ -210,15 +181,7 @@ export default {
 					this[playField] = ret;
 					this.moveType = 3
 					if (this.rotate == 90) {
-						let { PL_MT, PL_ML } = a4PicModel.rotatingPlFix(this.pl, this.imgW, this.imgH,this.moveType);
-						// this.mt_left_right = PL_MT;
-						// this.ml_left_right = PL_ML;
-						let { PT_MT, PT_ML } = a4PicModel.rotatingPtFix(this.pt, this.imgW, this.imgH);
-						// this.mt_up_down = PT_MT;
-						// this.ml_up_down = PT_ML;
-						this.mt = PL_MT +  PT_MT;
-						this.ml = PL_ML + PT_ML;
-						this.printR('右');
+						this.plAndPtSum()
 					}
 				}
 				if (funcName == 'changeSize') {
@@ -227,15 +190,7 @@ export default {
 					this.imgW = ret.W;
 					if (this.rotate == 90) {
 						//旋转的情况下 图片宽为高
-						let { PL_MT, PL_ML } = a4PicModel.rotatingPlFix(this.pl, this.imgW, this.imgH,this.moveType);
-						// this.mt_left_right = PL_MT;
-						// this.ml_left_right = PL_ML;
-						let { PT_MT, PT_ML } = a4PicModel.rotatingPtFix(this.pt, this.imgW, this.imgH);
-						 // this.mt_up_down = PT_MT;
-						 // this.ml_up_down = PT_ML;
-						this.mt = PL_MT +  PT_MT
-						this.ml = PL_ML + PT_ML
-						this.printR('剧中');
+						this.plAndPtSum()
 					}
 				}
 				if (funcName == 'rotating') {
@@ -251,21 +206,16 @@ export default {
 					this.imgH = ret.H;
 					this.imgW = ret.W;
 					this.rotate = ret.ROTATE;
-					// this.mt_up_down = ret.MT;
-					// this.ml_up_down = ret.ML;
 					this.mt = ret.MT;
 					this.ml = ret.ML;
 				}
 			}
 		},
-		printR(val) {
-			console.log(`--------类型${val}---------`);
-			console.log('mt_left_right:', this.mt_left_right);
-			console.log('ml_left_right:', this.ml_left_right);
-			console.log('mt_up_down:', this.mt_up_down);
-			console.log('ml_up_down:', this.ml_up_down);
-			console.log('mt:', this.mt);
-			console.log('ml:', this.ml);
+		plAndPtSum(val) {
+			let { PL_MT, PL_ML } = a4PicModel.rotatingPlFix(this.pl, this.imgW, this.imgH,this.moveType);
+			let { PT_MT, PT_ML } = a4PicModel.rotatingPtFix(this.pt, this.imgW, this.imgH);
+			this.mt = PL_MT +  PT_MT
+			this.ml = PL_ML + PT_ML
 		}
 	}
 };

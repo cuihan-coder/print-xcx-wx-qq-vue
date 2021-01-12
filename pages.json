@@ -1,13 +1,6 @@
 {
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/print/selfPrint",
-			"style": {
-				"navigationBarTitleText": "图片打印",
-				"navigationBarBackgroundColor": "#FFFFFF"
-			}
-		},
-		{
 			"path": "pages/index/home",
 			"style": {
 				"navigationStyle": "custom"
@@ -118,6 +111,13 @@
 			"path": "pages/print/zjzPicPrint",
 			"style": {
 				"navigationBarTitleText": "证件照打印",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/print/selfPrint",
+			"style": {
+				"navigationBarTitleText": "图片打印",
 				"navigationBarBackgroundColor": "#FFFFFF"
 			}
 		},

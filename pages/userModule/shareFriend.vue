@@ -5,30 +5,23 @@
 			<view class="dalibao">
 				<image class="title-img" src="http://qswy.com/static/xcximg/invitation_but_1@2x.png"></image>
 				<view class="voucher-list">
-					<view class="voucher-info">
+					<view class="voucher-info" v-for="(item,index) in voucherList" :key="index" >
+						<view>{{item.title}}</view>
+						<view>
+							<text>¥</text>
+							<text>{{item.use_benefits}}</text>
+						</view>
+						<view>优惠劵</view>
+					</view>
+					<!-- <view class="voucher-info">
 						<view>满1使用</view>
 						<view>
 							<text>¥</text>
 							<text>1</text>
 						</view>
 						<view>优惠劵</view>
-					</view>
-					<view class="voucher-info">
-						<view>满1使用</view>
-						<view>
-							<text>¥</text>
-							<text>1</text>
-						</view>
-						<view>优惠劵</view>
-					</view>
-					<view class="voucher-info">
-						<view>满1使用</view>
-						<view>
-							<text>¥</text>
-							<text>1</text>
-						</view>
-						<view>优惠劵</view>
-					</view>
+					</view> -->
+					
 				</view>
 				<view class="share-int">被邀请人完成首笔消费</view>
 				<view class="share-int">优惠券自动发送至您的账户中</view>
@@ -41,44 +34,12 @@
 					<text>邀请时间</text>
 					<text>状态</text>
 				</view>
-				<view class="share-list">
+				<view class="share-list" v-for="(item,index) in friendList" :key="index">
 					<view>
-						<image src="http://qswy.com/static/xcximg/certificates_example @2x.png"></image>
-						彩虹
+						<image :src="item.headimgurl"></image>
+						{{item.nickname}}
 					</view>
-					<view>2020-12-03 09:32</view>
-					<view>已注册</view>
-				</view>
-				<view class="share-list">
-					<view>
-						<image src="http://qswy.com/static/xcximg/certificates_example @2x.png"></image>
-						彩虹
-					</view>
-					<view>2020-12-03 09:32</view>
-					<view>已注册</view>
-				</view>
-				<view class="share-list">
-					<view>
-						<image src="http://qswy.com/static/xcximg/certificates_example @2x.png"></image>
-						彩虹
-					</view>
-					<view>2020-12-03 09:32</view>
-					<view>已注册</view>
-				</view>
-				<view class="share-list">
-					<view>
-						<image src="http://qswy.com/static/xcximg/certificates_example @2x.png"></image>
-						彩虹
-					</view>
-					<view>2020-12-03 09:32</view>
-					<view>已注册</view>
-				</view>
-				<view class="share-list">
-					<view>
-						<image src="http://qswy.com/static/xcximg/certificates_example @2x.png"></image>
-						彩虹
-					</view>
-					<view>2020-12-03 09:32</view>
+					<view>{{item.ctime}}</view>
 					<view>已注册</view>
 				</view>
 			</scroll-view>
@@ -95,9 +56,19 @@ import ygqq from '../../components/voucher/ygqq.vue';
 export default {
 	components: {},
 	data() {
-		return {};
+		return {
+			voucherList: [],
+			friendList: []
+		};
 	},
-	async onLoad() {},
+	async onLoad() {
+		let ret = await this.$helper.httpGet(this.$api.shareInfo_url_get)
+		if(ret.state == 'success'){
+			this.voucherList = ret.data.voucherList
+			this.friendList  = ret.data.friendList
+		}
+		
+	},
 	methods: {}
 };
 </script>
@@ -118,6 +89,7 @@ export default {
 	& .container {
 		padding: 920upx 32upx 0;
 		& .dalibao {
+			min-height: 600upx;
 			padding-bottom: 54upx;
 			background: url('http://qswy.com/static/xcximg/invitation_reward_bg@2x.png') no-repeat;
 			background-size: 100% 100%;
@@ -130,6 +102,7 @@ export default {
 			& .voucher-list {
 				@include display-flex-space-between;
 				padding: 100upx 0 43upx;
+				
 				& .voucher-info {
 					padding-bottom: 20upx;
 					@include w-h(32%, 212upx);
@@ -157,6 +130,10 @@ export default {
 					}
 				}
 			}
+			& .voucher-list::after{
+				content: '';
+				@include w-h(32%, 212upx);
+			}
 			& .share-int {
 				@include font-no-height(30upx, 500, $color-2E);
 				text-align: center;
@@ -181,6 +158,7 @@ export default {
 			z-index: 2;
 		}
 		& .yaoqinglist {
+			min-height: 227upx;
 			margin-top: 120upx;
 			padding-bottom: 54upx;
 			background: url('http://qswy.com/static/xcximg/invitation_people_bg@2x.png') no-repeat;

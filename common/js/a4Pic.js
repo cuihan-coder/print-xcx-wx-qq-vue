@@ -13,7 +13,6 @@ const a4Pic = {
 		//横屏图
 		if (originalW > originalH) {
 			if (originalW > a4Pic.A4Width || originalH > a4Pic.A4Height) {
-				console.log('hp')
 				W = a4Pic.A4Width
 				H = W / originalW * originalH
 			}
@@ -21,7 +20,6 @@ const a4Pic = {
 		//竖屏图
 		if (originalW < originalH) {
 			if (originalW > a4Pic.A4Width || originalH > a4Pic.A4Height) {
-				console.log('sp')
 				H = a4Pic.A4Height
 				W = H / originalH * originalW
 			}
@@ -30,7 +28,6 @@ const a4Pic = {
 		//正方形
 		if (originalW == originalH) {
 			if (originalW > a4Pic.A4Width || originalH > a4Pic.A4Height) {
-				console.log('zf')
 				W = a4Pic.A4Width
 				H = W
 			}

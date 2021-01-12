@@ -8,7 +8,7 @@
 				<text>有效时间：</text>
 				<text>{{ expireTime }}</text>
 			</view>
-			<view>使用范围：{{ cardType }}</view>
+			<view>{{ cardType }}</view>
 		</view>
 		<view class="jlq-right">
 			<view>

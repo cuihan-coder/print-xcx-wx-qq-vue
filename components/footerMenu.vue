@@ -9,7 +9,7 @@
 			<view>扫码打印</view>
 		</view>
 		<view class="menu-icon" @click="toPage('/pages/userModule/userInfo')">
-			<image src="http://qswy.com/static/xcximg/home_me_s@2x.png"></image>
+			<image src="http://qswy.com/static/xcximg/home_me_n@2x.png"></image>
 			<view>我的</view>
 		</view>
 	</view>

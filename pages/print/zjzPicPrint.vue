@@ -24,7 +24,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="load-more" @click="`${loadMore = selectList.length}`">
+			<view class="load-more" @click="`${loadMore = selectList.length}`" v-if="loadMore ==2">
 				<image src="http://qswy.com/static/xcximg/file_display@2x.png"></image>
 				更多规格
 			</view>

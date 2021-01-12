@@ -2,7 +2,7 @@
 	<view class="content">
 		<scanEquipment></scanEquipment>
 		<view class="pad-height"></view>
-		<view class="entry-btn">
+		<view class="entry-btn"  @click="toPage('/pages/print/selfPrint')">
 			<image src="http://qswy.com/static/xcximg/certificates_s_5@2x.png"></image>
 			<view class="cont-info">
 				<view>图片打印</view>

@@ -1,16 +1,35 @@
 <template>
 	<view class="content">
-		<!-- 代金券 -->
-		<djq money="5" useWhere="消费满20元时使用" expireTime="2021-01-14 23:59:59" cardType="证件照"></djq>
-		<!-- 奖励券 -->
-		<jlq money="5" useWhere="分享奖励券，满10元减5元" expireTime="23小时10分50秒" cardType="证件照"></jlq>
-		<!-- 新人券 -->
-		<xrq money="5" useWhere="新人凭券免费打印一张" expireTime="23小时10分50秒" cardType="证件照"></xrq>
-		<!-- 已过期券 -->
-		<ygqq money="5" useWhere="充值满50元时使用" expireTime="2017-09-14" cardType="证件照"></ygqq>
-		<ygqq money="5" useWhere="充值满50元时使用" expireTime="2017-09-14" cardType="证件照"></ygqq>
-		<ygqq money="5" useWhere="充值满50元时使用" expireTime="2017-09-14" cardType="证件照"></ygqq>
-		<ygqq money="5" useWhere="充值满50元时使用" expireTime="2017-09-14" cardType="证件照"></ygqq>
+		<view v-for="(item, index) in list" :key="index">
+			
+			<!-- 代金券 -->
+			<djq v-if="item.get_method == 3" 
+			:money="item.use_benefits" 
+			:useWhere="item.title" 
+			:expireTime="item.expire_time" 
+			:cardType="item.document_type_title"></djq>
+			<!-- 奖励券 -->
+			<jlq 
+			v-if="item.get_method == 1" 
+			:money="item.use_benefits"
+			:useWhere="item.title" 
+			:expireTime="item.expire_time" 
+			:cardType="item.document_type_title"></jlq>
+			<!-- 新人券 -->
+			<xrq v-if="item.get_method == 2" 
+			:money="item.use_benefits"
+			:useWhere="item.title" 
+			:expireTime="item.expire_time" 
+			:cardType="item.document_type_title"></xrq>
+			<!-- 已过期券 -->
+			<ygqq v-if="item.get_method == 0" 
+			:money="item.use_benefits"
+			:useWhere="item.title" 
+			:expireTime="item.expire_time" 
+			:cardType="item.document_type_title"></ygqq>
+			
+		</view>
+		
 	</view>
 </template>
 
@@ -28,9 +47,17 @@ export default {
 		ygqq
 	},
 	data() {
-		return {};
+		return {
+			list:[]
+		};
 	},
-	async onLoad() {},
+	async onLoad() {
+		let ret = await this.$helper.httpGet(this.$api.getVoucherList_url_get)
+		if(ret.state == 'success'){
+			this.list = ret.data.list
+		}
+		console.log(ret)
+	},
 	methods: {}
 };
 </script>

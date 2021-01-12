@@ -4,23 +4,23 @@
 		<view v-if="showParam.indexOf(1) != -1" class="color">
 			<text class="color-title">颜色</text>
 			<view class="color-select">
-				<view class="active">黑白</view>
-				<view>彩色</view>
+				<view @click="color = 0"  :class="color == 0 ? 'active' : '' ">黑白</view>
+				<view @click="color = 1"  :class="color == 1 ? 'active' : '' ">彩色</view>
 			</view>
 		</view>
 		<view v-if="showParam.indexOf(2) != -1" class="color">
 			<text class="color-title">版面</text>
 			<view class="color-select">
-				<view class="active">单面</view>
-				<view>双面</view>
+				<view @click="sides = 0"  :class="sides == 0 ? 'active' : '' ">单面</view>
+				<view @click="sides = 1"  :class="sides == 1 ? 'active' : '' ">双面</view>
 			</view>
 		</view>
 		<view v-if="showParam.indexOf(3) != -1" class="pages">
 			<text class="pages-title">份数</text>
 			<view class="pages-counter">
-				<view>-</view>
-				<input value="1" />
-				<view>+</view>
+				<view @click="counter('printNum',-1)">-</view>
+				<input disabled="true" v-model="printNum" />
+				<view @click="counter('printNum',1)">+</view>
 			</view>
 		</view>
 	</view>
@@ -34,7 +34,24 @@ export default {
 			type:Array,
 			default:() => [1,2,3]
 		}
+	},
+	data:()=> ({
+		//颜色 1 彩色 0 黑白
+		color: 1,
+		//单双面 1 双面 0 单面
+		sides: 0,
+		//打印份数
+		printNum:1,
+	}),
+	methods:{
+		counter(field,val){
+			if(this[field] + val <= 0){
+				return
+			}
+			this[field] += val
+		}
 	}
+	
 };
 </script>
 

@@ -39,8 +39,8 @@
 					<view class="where-container-row-1-rfight bottom-line bottom-height">
 						<view class="where-container-row-1-rfight-1">版面</view>
 						<view class="where-page-num">
-							<view class="left-btn xuanzhong">单面</view>
-							<view class="right-btn weixuanzhong">双面</view>
+							<view @click="sides = 0 " :class=" sides == 0 ? 'left-btn l-xuanzhong' : 'left-btn' ">单面</view>
+							<view @click="sides = 1 " :class=" sides == 1 ? 'right-btn r-xuanzhong' : 'right-btn' ">双面</view>
 						</view>
 					</view>
 				</view>
@@ -56,8 +56,8 @@
 					<view class="where-container-row-1-rfight top-height">
 						<view class="where-container-row-1-rfight-1">颜色</view>
 						<view class="where-page-num">
-							<view class="left-btn xuanzhong">黑白</view>
-							<view class="right-btn weixuanzhong">彩色</view>
+							<view @click="color = 0 " :class=" color == 0 ? 'left-btn l-xuanzhong' : 'left-btn' ">黑白</view>
+							<view @click="color = 1 " :class=" color == 1 ? 'right-btn r-xuanzhong' : 'right-btn' ">彩色</view>
 						</view>
 					</view>
 				</view>
@@ -92,7 +92,10 @@
 		data(){
 			return {
 				printNum:1,
-				
+				//颜色 1 彩色  0 黑白
+				color:1,
+				//单双面 1双面 0 单面
+				sides: 0,
 			}
 		},
 		methods:{
@@ -258,19 +261,28 @@ page {
 						@include w-h(106upx, 80upx);
 						border-radius: 10upx 0px 0px 10upx;
 						@include font-center;
-					}
-					& .right-btn {
-						@include w-h(106upx, 80upx);
-						border-radius: 0px 10upx 10upx 0px;
-						@include font-center;
-					}
-					& .xuanzhong {
 						border-top: 3upx solid $color-C5;
 						border-bottom: 3upx solid $color-C5;
 						border-left: 3upx solid $color-C5;
 						@include font-no-height(24upx, 500, $color-A2A3A3);
 					}
-					& .weixuanzhong {
+					& .right-btn {
+						@include w-h(106upx, 80upx);
+						border-radius: 0px 10upx 10upx 0px;
+						@include font-center;
+						border-top: 3upx solid $color-C5;
+						border-bottom: 3upx solid $color-C5;
+						border-right: 3upx solid $color-C5;
+						@include font-no-height(24upx, 500, $color-A2A3A3);
+					}
+					& .l-xuanzhong {
+						border-top: 3upx solid $color-3985FF;
+						border-bottom: 3upx solid $color-3985FF;
+						border-left: 3upx solid $color-3985FF;
+						background: $color-3985FF;
+						@include font-no-height(24upx, 500, $color-ff);
+					}
+					& .r-xuanzhong {
 						border-top: 3upx solid $color-3985FF;
 						border-bottom: 3upx solid $color-3985FF;
 						border-right: 3upx solid $color-3985FF;

@@ -6,7 +6,9 @@
 		</swiper>
 		<view class="pad-height"></view>
 		<scroll-view class="scroll-view" scroll-y="true" show-scrollbar="false">
-			<scanEquipment></scanEquipment>
+			<scanEquipment 
+			
+			></scanEquipment>
 			<view class="item-entry" @click="toPage('/pages/order/suborder')">
 				<image src="http://qswy.com/static/xcximg/home_file@2x.png"></image>
 				<view class="item-entry-font" >
@@ -33,7 +35,10 @@
 		<!-- 选择图片打印弹窗 -->
 		<picPrintSelectDialog :isShow="printDialogShow"></picPrintSelectDialog>
 		<!-- 首屏优惠券弹窗 -->
-		<voucherDialog :isShow="voucherDialogShow"></voucherDialog>
+		<voucherDialog 
+		:isShow="voucherDialogShow"
+		:voucherList="voucherList"
+		></voucherDialog>
 		<footerMenu></footerMenu>
 	</view>
 </template>
@@ -71,11 +76,26 @@ export default {
 		return {
 			title: 'Hello',
 			printDialogShow: false,
-			voucherDialogShow: false
+			voucherDialogShow: false,
+			voucherList:[]
 		};
 	},
-	async onLoad() {
-		//this.$store.commit('home/SET_VOUCHERDIALOGSHOW', true);
+	async onLoad(option) {
+		//设置全局的平台属性
+		this.$store.commit('SET_PLATFORM',await this.$helper.getPlatform())
+		let code = await this.$login.getCode()
+		let pid = option.pid ? option.pid : 0
+		let group_id = option.group_id ? option.group_id : 0
+		let platform = this.$store.state.platform
+		let ret = await this.$login.login({code,pid,platform,group_id})
+		let userInfo = await this.$helper._getCache('userInfo')
+		this.voucherList = await this.$helper._getCache('voucherList')
+		if(userInfo.is_receive_couple_reward == 0 && this.voucherList.length > 0){
+			//显示红包弹窗
+			this.$store.commit('home/SET_VOUCHERDIALOGSHOW', true);
+			userInfo.is_receive_couple_reward = 1
+			this.$helper._setCache('userInfo',userInfo)
+		}
 	},
 	methods: {
 		toPage(url) {

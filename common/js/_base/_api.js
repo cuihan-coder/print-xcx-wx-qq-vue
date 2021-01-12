@@ -1,7 +1,15 @@
+
 let host = {
-	pro: '',
-	local: 'local'
+	pro: 'http://qswy.com',
+	local: 'http://qswy.com'
 }
+let development = 'pro'
+
 module.exports = {
-	// host_api2:'http://localhost:8080/',//h5接口请求host
+	login_url_post: `${host[development]}/api/user/login`,
+	//获取优惠券列表
+	getVoucherList_url_get: `${host[development]}/api/user/getVoucherList` ,
+	//获取邀请页面基础数据
+	shareInfo_url_get: `${host[development]}/api/sharefriend/shareInfo` ,
+	
 }

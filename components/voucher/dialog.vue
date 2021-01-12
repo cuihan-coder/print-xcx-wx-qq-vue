@@ -3,10 +3,15 @@
 		<view class="background-ceng" @click="closeFc"></view>
 		<view class="voucher-container">
 			<view class="row-1">恭喜你获得</view>
-			<view class="row-2">3张代金券</view>
-			<voucher></voucher>
-			<voucher></voucher>
-			<voucher></voucher>
+			<view class="row-2">{{voucherList.length}}张代金券</view>
+			<voucher 
+			v-for="(item, index) in voucherList" 
+			:key="index"
+			:money="item.use_benefits"
+			:useWhere="item.title"
+			:expireTime="item.expire_time"
+			></voucher>
+			
 			<view class="tips">
 				优惠券已放入您的账户中，点击
 				<navigator url="/pages/userModule/voucher" class="tiaozhuan">优惠券</navigator>
@@ -31,6 +36,10 @@ export default {
 		isShow: {
 			type: Boolean,
 			default: true
+		},
+		voucherList:{
+			type:[Array, Object],
+			default: ()=> []
 		}
 	},
 	methods: {
