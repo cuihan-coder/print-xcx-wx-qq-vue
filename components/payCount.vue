@@ -3,18 +3,33 @@
 		<view class="height-pad"></view>
 		<view class="heji">
 			<view class="heji-left">
-				<text>共56张</text>
+				<text>共{{pageNum}}面</text>
 				<text>合计：</text>
-				<text>19.50元</text>
+				<text>{{orderMoney}}元</text>
 			</view>
-			<view class="heji-right">支付并打印</view>
+			<view class="heji-right" @click="paySub">支付并打印</view>
 		</view>
 	</view>
 </template>
 
 <script>
 	export default {
-		name: "footerCount"
+		name: "footerCount",
+		props:{
+			orderMoney:{
+				type:[String,Number],
+				default:0
+			},
+			pageNum:{
+				type:[String,Number],
+				default:0
+			}
+		},
+		methods:{
+			paySub(){
+				uni.$emit('paySub')
+			}
+		}
 	}
 </script>
 

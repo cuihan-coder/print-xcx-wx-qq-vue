@@ -7,7 +7,7 @@
 						<image class="item-1-left-image" src="http://qswy.com/static/xcximg/currency_printer_s@2x.png"></image>
 						<text>{{ device_name }}</text>
 					</view>
-					<image class="item-1-right" src="http://qswy.com/static/xcximg/file_scan_code@2x.png"></image>
+					<image @click="scanCode" class="item-1-right" src="http://qswy.com/static/xcximg/file_scan_code@2x.png"></image>
 				</view>
 				<view class="item-2">
 					<image class="item-2-image" src="http://qswy.com/static/xcximg/currency_add@2x.png"></image>
@@ -28,21 +28,64 @@
 <script>
 export default {
 	name: 'scanEquipment',
-	props: {
+	data:()=>({
 		//是否需要扫码设备进行打印 1 是 0 不是
-		is_must_scan: {
-			type: [Number, String],
-			default: 1
-		},
+		is_must_scan: 0,
 		//分组名
-		group_name: {
-			type: String,
-			default: '请扫码'
-		},
+		group_name: '请扫码',
 		//设备名称
-		device_name: {
-			type: String,
-			default: '请扫码'
+		device_name: '请扫码'
+	}),
+	created(){
+		if(this.$store.state.groupInfo){
+			this.changeInit(this)
+		}
+	},
+	beforeDestroy(){
+		
+		if(this.$store.state.groupInfo){
+			console.log(this.$store.state.groupInfo,'jll')
+			this.changeInit(this)
+		}
+	},
+	methods: {
+		scanCode() {
+			let that = this;
+			uni.scanCode({
+				onlyFromCamera: true,
+				scanType: ['qrCode', 'barCode', 'datamatrix', 'pdf417'],
+				success: async function(res) {
+					that.$store.commit('SET_DEVICECODE', res.result);
+					//获取分组价格以及设备信息
+					let userInfo = await that.$helper._getCache('userInfo');
+					let query = that.$helper.objToQuery({ device_code: that.$store.state.deviceCode, group_id: userInfo.group_id });
+					let ret = await that.$helper.httpGet(that.$api.getDeviceGroupInfo_url_get + query);
+					if (ret.state == 'success') {
+						that.$store.commit('SET_DEVICEINFO', ret.data.deviceInfo);
+						that.$store.commit('SET_GROUPINFO', ret.data.groupInfo);
+						that.$store.commit('SET_PTPRICE', ret.data.ptPrice);
+						that.$store.commit('SET_CZPRICE', ret.data.czPrice);
+						//组ID与设备对应组ID不一致，则进行绑定设备对于的组ID，并且更新用户的组ID
+						if(ret.data.token){
+							userInfo.group_id = ret.data.groupInfo.id
+							that.$helper._setCache('userInfo',userInfo);
+							that.$helper._setCache('loginToken',token);
+						}
+						that.changeInit(that)
+					} else {
+						uni.showToast({
+							title: ret.msg,
+							icon: 'none',
+							duration:3000
+						});
+					}
+				}
+			});
+		},
+		changeInit(that){
+			that.is_must_scan = that.$store.state.groupInfo.is_must_scan
+			that.group_name = that.$store.state.groupInfo.goup_name
+			that.device_name = that.$store.state.deviceInfo.name
 		}
 	}
 };

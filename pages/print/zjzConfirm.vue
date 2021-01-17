@@ -1,8 +1,16 @@
 <template>
 	<view class="content">
 		<scanEquipment></scanEquipment>
-		<zjzsub></zjzsub>
-		<footerCount></footerCount>
+		<zjzsub 
+		:color="color" 
+		:printType="printType"
+		:sinPic="sinPic"
+		:tyPic="tyPic"
+		></zjzsub>
+		<footerCount
+		:pageNums="pageNums"
+		:orderPrice="orderPrice"
+		></footerCount>
 	</view>
 </template>
 
@@ -10,6 +18,8 @@
 import scanEquipment from '../../components/scanEquipment.vue';
 import footerCount from '../../components/footerCount.vue';
 import zjzsub from '../../components/zjzsub.vue';
+import payModel from '../../common/js/pay.js'
+
 export default {
 	components: {
 		scanEquipment,
@@ -18,8 +28,81 @@ export default {
 	},
 	data() {
 		return {
-			showParam: [1, 3]
+			is_subing:0,
+			showParam: [1, 3],
+			color:'',
+			printType:{},
+			imgUrl:'',
+			sinPic:'',
+			tyPic:'',
+			pageNums:0,
+			orderPrice: 0,
+			taskId:[]
 		};
+	},
+	onLoad() {
+		this.printType =  this.$store.state.zjzprint.printTypeIndex
+		this.color = this.$store.state.zjzprint.color
+		this.imgUrl = this.$store.state.zjzprint.imgUrl
+		//证件照美化排版
+		this.uploadImgbeautify(this.imgUrl,this.color,this.printType.size)
+		let that = this
+		uni.$on('subOrder',async function(){
+			if(that.is_subing == 1){
+				return
+			}
+			that.is_subing = 1
+			let device_code = that.$store.state.deviceCode
+			let ret = await that.$helper.httpPost(that.$api.addMainOrder_url_post,{taskIds:[that.taskId],device_code})
+			if(ret.state == 'success'){
+				uni.showToast({
+					title: ret.msg,
+					icon:'none',
+					duration:3000
+				})
+				uni.navigateTo({
+					url:"/pages/print/payPrint?main_id=" + ret.data.main_id
+				})
+			}
+			that.is_subing = 0
+		})
+		//切换颜色
+		uni.$on('changeBackColor',async function(backColor){
+			that.uploadImgbeautify(that.imgUrl,backColor,that.printType.size)
+		})
+		
+	},
+	methods:{
+		async uploadImgbeautify(imgUrl,backColor,size){
+			uni.showLoading({
+				title:'图片智能处理中'
+			})
+			let query = this.$helper.objToQuery({imgUrl:this.imgUrl,backColor:backColor,size:this.printType.size})
+			let ret = await this.$helper.httpGet(this.$api.cardPicButifulAndTypography_url_get + query)
+			uni.showToast({
+				title: ret.msg,
+				icon:'none',
+				duration:3000
+			})
+			if(ret.state == 'success'){
+				this.sinPic = ret.data.sinPic
+				this.tyPic = ret.data.tyPic
+				this.pageNums = ret.data.file_pages
+				this.orderPrice = ret.data.price
+				this.taskId = ret.data.taskId
+			}
+			uni.hideLoading()
+		}
+	},
+	computed:{
+		printColor(){
+			return this.$store.state.zjzprint.color
+		}
+	},
+	watch:{
+		printColor(val){
+			this.color = val
+		}
 	}
 };
 </script>
@@ -64,7 +147,7 @@ page {
 					@include font-no-height(26upx, 500, $color-B6);
 				}
 			}
-			& .file-img{
+			& .file-img {
 				width: 100%;
 				height: 100%;
 			}

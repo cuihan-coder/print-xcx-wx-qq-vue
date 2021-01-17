@@ -122,21 +122,51 @@ export default {
 	methods: {
 		//上传图片
 		uploadPic() {
-			let _that = this;
+			let that = this;
+			
 			uni.chooseImage({
 				count: 1, //默认9
 				sizeType: ['original'], //可以指定是原图还是压缩图，默认二者都有
 				sourceType: ['album', 'camera'], //从相册选择
-				success: function(res) {
-					_that.imgSrc = res.tempFilePaths[0];
-					_that.allParamInit();
-					uni.getImageInfo({
-						src: res.tempFilePaths[0],
-						success: function(image) {
-							_that.orImg = image;
-							let picInitParamWH = a4PicModel.picWHInit(image.width, image.height);
-							_that.imgH = picInitParamWH.H;
-							_that.imgW = picInitParamWH.W;
+				success: async function(res) {
+					uni.showLoading({
+						title: '文件上传中'
+					});
+					
+					//上传文件到后台
+					uni.uploadFile({
+						url: that.$api.uploadImg_url_post, //仅为示例，非真实的接口地址
+						filePath: res.tempFilePaths[0],
+						name: 'file',
+						header: { Authorization: 'Bearer ' + (await that.$helper._getCache('loginToken')) },
+						success: uploadFileRes => {
+							uni.hideLoading();
+							uploadFileRes = JSON.parse(uploadFileRes.data);
+							if (uploadFileRes.state == 'success') {
+								uni.showToast({
+									title: uploadFileRes.msg,
+									icon: 'none',
+									duration:3000
+								});
+								that.imgSrc = uploadFileRes.data[0];
+								//图片成功传递url
+								uni.$emit('picUploadSucToImgurl',that.imgSrc)
+								that.allParamInit();
+								uni.getImageInfo({
+									src: that.imgSrc,
+									success: function(image) {
+										that.orImg = image;
+										let picInitParamWH = a4PicModel.picWHInit(image.width, image.height);
+										that.imgH = picInitParamWH.H;
+										that.imgW = picInitParamWH.W;
+									}
+								});
+								return;
+							}
+							uni.showToast({
+								title: '上传失败',
+								icon: 'none'
+							});
 						}
 					});
 				}
@@ -153,6 +183,13 @@ export default {
 						let changeH = this.imgW > this.imgH ? this.imgW : this.imgH
 						let ret = a4PicModel[funcName](val, this.pt, changeH, this.rotate);
 						this[playField] = ret;
+						
+						//保存图片高
+						this.$store.commit('selfprint/SET_IMGH',changeH)
+						//保存图片top
+						this.$store.commit('selfprint/SET_TOP',this[playField])
+						//保存图片left
+						this.$store.commit('selfprint/SET_LEFT',this[playField])
 						this.plAndPtSum()
 						return;
 					}
@@ -200,15 +237,24 @@ export default {
 						let picInitParamWH = a4PicModel.picWHInit(image.width, image.height);
 						this.imgH = picInitParamWH.H;
 						this.imgW = picInitParamWH.W;
+						this.$store.commit('selfprint/SET_IMGH',this.imgH)
 						return;
 					}
 					let ret = a4PicModel[funcName](val, this.imgW, this.imgH, this.rotate, this.pl, this.pt);
 					this.imgH = ret.H;
 					this.imgW = ret.W;
+					this.$store.commit('selfprint/SET_IMGH',this.imgH)
 					this.rotate = ret.ROTATE;
 					this.mt = ret.MT;
 					this.ml = ret.ML;
 				}
+				
+				//保存图片高
+				this.$store.commit('selfprint/SET_IMGH',this.imgH)
+				//保存图片top
+				this.$store.commit('selfprint/SET_TOP',this.pt)
+				//保存图片left
+				this.$store.commit('selfprint/SET_LEFT',this.pl)
 			}
 		},
 		plAndPtSum(val) {

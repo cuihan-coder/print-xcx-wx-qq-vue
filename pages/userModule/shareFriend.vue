@@ -5,11 +5,11 @@
 			<view class="dalibao">
 				<image class="title-img" src="http://qswy.com/static/xcximg/invitation_but_1@2x.png"></image>
 				<view class="voucher-list">
-					<view class="voucher-info" v-for="(item,index) in voucherList" :key="index" >
-						<view>{{item.title}}</view>
+					<view class="voucher-info" v-for="(item, index) in voucherList" :key="index">
+						<view>{{ item.title }}</view>
 						<view>
 							<text>¥</text>
-							<text>{{item.use_benefits}}</text>
+							<text>{{ item.use_benefits }}</text>
 						</view>
 						<view>优惠劵</view>
 					</view>
@@ -21,11 +21,10 @@
 						</view>
 						<view>优惠劵</view>
 					</view> -->
-					
 				</view>
 				<view class="share-int">被邀请人完成首笔消费</view>
 				<view class="share-int">优惠券自动发送至您的账户中</view>
-				<view class="ljyq-btn">立即邀请</view>
+				<button open-type="share"  class="ljyq-btn">立即邀请</button>
 			</view>
 			<image class="haoyou-img" src="http://qswy.com/static/xcximg/invitation_but_2@2x.png"></image>
 			<scroll-view scroll-y="true" class="yaoqinglist">
@@ -34,12 +33,12 @@
 					<text>邀请时间</text>
 					<text>状态</text>
 				</view>
-				<view class="share-list" v-for="(item,index) in friendList" :key="index">
+				<view class="share-list" v-for="(item, index) in friendList" :key="index">
 					<view>
 						<image :src="item.headimgurl"></image>
-						{{item.nickname}}
+						{{ item.nickname }}
 					</view>
-					<view>{{item.ctime}}</view>
+					<view>{{ item.ctime }}</view>
 					<view>已注册</view>
 				</view>
 			</scroll-view>
@@ -62,14 +61,40 @@ export default {
 		};
 	},
 	async onLoad() {
-		let ret = await this.$helper.httpGet(this.$api.shareInfo_url_get)
-		if(ret.state == 'success'){
-			this.voucherList = ret.data.voucherList
-			this.friendList  = ret.data.friendList
+		let ret = await this.$helper.httpGet(this.$api.shareInfo_url_get);
+		if (ret.state == 'success') {
+			this.voucherList = ret.data.voucherList;
+			this.friendList = ret.data.friendList;
 		}
+	},
+	 onShareAppMessage(){
+		let that = this
+		uni.getProvider({
+			service: 'oauth',
+			success:async function(res) {
+				let userInfo = await that.$helper._getCache('userInfo');
+				let plateform = ~res.provider.indexOf('qq') ? 'qq' : 'weixin'
+				if(plateform == 'qq'){
+					uni.showShareMenu({
+						title: '下次打印可以来这里哦！超方便实惠！',
+						query: `pid=${userInfo.id}&group_id=${userInfo.group_id}`
+					});
+				}
+				if(plateform == 'weixin'){
+					let path = `/pages/index/home?pid=${userInfo.id}&group_id=${userInfo.group_id}`;
+					uni.showShareMenu({
+						title: '下次打印可以来这里哦！超方便实惠！',
+						path: path
+					});
+				}
+			}
+		});
+		
 		
 	},
-	methods: {}
+	methods: {
+		
+	}
 };
 </script>
 
@@ -102,7 +127,7 @@ export default {
 			& .voucher-list {
 				@include display-flex-space-between;
 				padding: 100upx 0 43upx;
-				
+
 				& .voucher-info {
 					padding-bottom: 20upx;
 					@include w-h(32%, 212upx);
@@ -130,7 +155,7 @@ export default {
 					}
 				}
 			}
-			& .voucher-list::after{
+			& .voucher-list::after {
 				content: '';
 				@include w-h(32%, 212upx);
 			}

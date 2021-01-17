@@ -1,22 +1,12 @@
 <template>
 	<view class="content">
-		<view class="active-item" @click="toPage('/pages/index/activeInfo')">
-			<image src="http://qswy.com/static/xcximg/huodong.jpeg"></image>
+		<view class="active-item" v-for="(item,index) in list" :key="index" @click="toPage('/pages/index/activeInfo?id='+ item.id)">
+			<image :src="item.thumbnail"></image>
 			<view class="item-padding">
-				<view class="title">深圳同城 乐翻天-大牌来袭 Vlink 线下活动第四期-轰趴大狂欢</view>
+				<view class="title">{{item.title}}</view>
 				<view class="active-time">
 					<image src="http://qswy.com/static/xcximg/me_activity_time@2x.png"></image>
-					至2019-12-31
-				</view>
-			</view>
-		</view>
-		<view class="active-item">
-			<image src="http://qswy.com/static/xcximg/huodong.jpeg"></image>
-			<view class="item-padding">
-				<view class="title">深圳同城 乐翻天-大牌来袭 Vlink 线下活动第四期-轰趴大狂欢</view>
-				<view class="active-time">
-					<image src="http://qswy.com/static/xcximg/me_activity_time@2x.png"></image>
-					至2019-12-31
+					至{{item.end_time}}
 				</view>
 			</view>
 		</view>
@@ -26,9 +16,16 @@
 <script>
 export default {
 	data() {
-		return {};
+		return {
+			list: []
+		};
 	},
-	async onLoad() {},
+	async onLoad() {
+		let ret = await this.$helper.httpGet(this.$api.activetyList_url_get)
+		if(ret.state == 'success'){
+			this.list = ret.data.list
+		}
+	},
 	methods: {
 		toPage(url) {
 			uni.navigateTo({

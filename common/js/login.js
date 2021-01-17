@@ -36,12 +36,14 @@ const loginModel = {
 	},
 	async login(data, header) {
 		let tokenExpireTime = await _helper._getCache('tokenExpireTime')
-		if (!tokenExpireTime && tokenExpireTime <= Math.ceil(new Date().getTime() / 1000)) {
+		
+		if (!tokenExpireTime || tokenExpireTime <= Math.ceil(new Date().getTime() / 1000)) {
 			let ret = await _helper.httpPost(_api.login_url_post, data, header)
 			if (ret == false) {
 				uni.showToast({
 					title: '系统请求错误',
-					icon: 'none'
+					icon: 'none',
+					duration:3000
 				})
 				return
 			}

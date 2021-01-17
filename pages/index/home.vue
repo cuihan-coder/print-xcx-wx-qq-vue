@@ -2,13 +2,13 @@
 	<view class="content">
 		<view class="title">青速文印</view>
 		<swiper class="swiper" indicator-dots="true" autoplay="true" interval="3000">
-			<swiper-item><image src="http://qswy.com/static/xcximg/bannerb.jpg"></image></swiper-item>
+			<swiper-item @click="toPage(item.link)" v-for="(item,index) in bannerList" :key="index">
+				<image :src="item.src"></image>
+			</swiper-item>
 		</swiper>
 		<view class="pad-height"></view>
 		<scroll-view class="scroll-view" scroll-y="true" show-scrollbar="false">
-			<scanEquipment 
-			
-			></scanEquipment>
+			<scanEquipment></scanEquipment>
 			<view class="item-entry" @click="toPage('/pages/order/suborder')">
 				<image src="http://qswy.com/static/xcximg/home_file@2x.png"></image>
 				<view class="item-entry-font" >
@@ -77,7 +77,8 @@ export default {
 			title: 'Hello',
 			printDialogShow: false,
 			voucherDialogShow: false,
-			voucherList:[]
+			voucherList:[],
+			bannerList:[]
 		};
 	},
 	async onLoad(option) {
@@ -95,6 +96,15 @@ export default {
 			this.$store.commit('home/SET_VOUCHERDIALOGSHOW', true);
 			userInfo.is_receive_couple_reward = 1
 			this.$helper._setCache('userInfo',userInfo)
+		}
+		//获取banner
+		this.bannerList = this.$store.state.mainBanner
+		if(this.bannerList < 1){
+			let bannerRet = await this.$helper.httpGet(this.$api.getBanner_url_get+'?type=1')
+			if(bannerRet.state == 'success'){
+				this.$store.commit('SET_MAINBANNER',bannerRet.data)
+				this.bannerList = bannerRet.data
+			}
 		}
 	},
 	methods: {

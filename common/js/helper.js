@@ -9,7 +9,7 @@ const helper = {
 		let global;
 		let token = await helper._getCache('loginToken')
 		if(token){
-			global = {Authorization:'Bearer '+ await helper._getCache('loginToken')}
+			global = {Authorization:'Bearer '+ token}
 			header = Object.assign(header,global)
 		}
 		header = Object.assign(header,global)
@@ -24,7 +24,8 @@ const helper = {
 				fail: (res) => {
 					uni.showToast({
 						title: '系统请求错误',
-						icon: 'none'
+						icon: 'none',
+						duration:3000
 					})
 				}
 			})
@@ -34,7 +35,7 @@ const helper = {
 		let global;
 		let token = await helper._getCache('loginToken')
 		if(token){
-			global = {Authorization:'Bearer '+ await helper._getCache('loginToken')}
+			global = {Authorization:'Bearer '+ token}
 			header = Object.assign(header,global)
 		}
 		
@@ -59,15 +60,15 @@ const helper = {
 	objToQuery(obj){
 		let query = ''
 		for (let key in obj) {
-			query += `&key=${obj[key]}`
+			query += `&${key}=${obj[key]}`
 		}
 		query = query.replace(/(^&*)/g,"")
 		return '?' + query
 	},
-	getPlatform(){
+	getPlatform(service = 'oauth'){
 		return new Promise((resolve,reject) =>{
 			uni.getProvider({
-				service: 'oauth',
+				service: service,
 				success: function(res) {
 					let platform = ~res.provider.indexOf('qq') ? 'qq' : 'weixin'
 					resolve(platform)

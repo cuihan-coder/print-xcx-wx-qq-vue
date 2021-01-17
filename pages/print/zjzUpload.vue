@@ -1,7 +1,9 @@
 <template>
 	<view class="content">
 		<scanEquipment></scanEquipment>
-		<zjzupload></zjzupload>
+		<zjzupload
+		:printType="printType"
+		></zjzupload>
 	</view>
 </template>
 
@@ -15,8 +17,12 @@ export default {
 	},
 	data() {
 		return {
-			showParam: [1, 3]
+			showParam: [1, 3],
+			printType:{}
 		};
+	},
+	onLoad() {
+		this.printType = this.$store.state.zjzprint.printTypeIndex
 	}
 };
 </script>

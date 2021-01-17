@@ -1,21 +1,23 @@
 <template>
 	<view class="mn-A4">
 		<view class="title">
-			<image :src="picList[0].pic"></image>
-			<text>{{ picList[0].name }}</text>
-			<text>({{ picList[0].size }})</text>
+			<image :src="printType.pic"></image>
+			<text>{{printType.name }}</text>
+			<text>({{ printType.size }})</text>
 		</view>
-		<view class="case-img"><image src="http://qswy.com/static/xcximg/certificates_example @2x.png"></image></view>
+		<view class="case-img">
+			<image :src="sinPic"></image>
+		</view>
 		<view class="preview-title">排列预览（6寸胶纸)</view>
 		<view class="preview-img">
-			<image src="http://qswy.com/static/xcximg/huodong.jpeg"></image>
+			<image :src="tyPic"></image>
 		</view>
 		<view class="color-selector">
 			<text>底色</text>
-			<view class="select-btn hongse">
-				<view></view>
-				<view></view>
-				<view></view>
+			<view :class="color == 'blue' ? 'select-btn blue' : (color == 'red' ? 'select-btn red' : 'select-btn white')">
+				<view @click="changeBackColor('blue')"></view>
+				<view @click="changeBackColor('red')"></view>
+				<view @click="changeBackColor('white')"></view>
 			</view>
 		</view>
 	</view>
@@ -24,134 +26,35 @@
 <script>
 export default {
 	data: () => ({
-		picList: [
-			{
-				name: '一寸',
-				size: '25mm×35mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
-			},
-			{
-				name: '二寸',
-				size: '35mm×49mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
-			},
-			{
-				name: '小一寸',
-				size: '22mm×32mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
-			},
-			{
-				name: '小二寸',
-				size: '35mm×45mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
-			},
-			{
-				name: '三寸',
-				size: '55mm×84mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
-			},
-			{
-				name: '五寸',
-				size: '89mm×127mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
-			},
-			{
-				name: '身份证',
-				size: '26mm×32mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon1@2x.png'
-			},
-			{
-				name: '居住证',
-				size: '22mm×32mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon2@2x.png'
-			},
-			{
-				name: '驾驶证',
-				size: '22mm×32mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon3@2x.png'
-			},
-			{
-				name: '社保',
-				size: '26mm×32mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon4@2x.png'
-			},
-			{
-				name: '中国护照',
-				size: '33mm×48mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon5@2x.png'
-			},
-			{
-				name: '台湾通行证',
-				size: '33mm×48mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon6@2x.png'
-			},
-			{
-				name: '港澳通行证',
-				size: '33mm×48mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon8@2x.png'
-			},
-			{
-				name: '入台证',
-				size: '35mm×45mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon7@2x.png'
-			},
-			{
-				name: '入境签证',
-				size: '33mm×48mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon16@2x.png'
-			},
-			{
-				name: '通用签证',
-				size: '35mm×45mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon15@2x.png'
-			},
-			{
-				name: '来华签证',
-				size: '33mm×48mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon14@2x.png'
-			},
-			{
-				name: '泰国签证',
-				size: '35mm×45mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon13@2x.png'
-			},
-			{
-				name: '日本签证',
-				size: '45mm×45mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon12@2x.png'
-			},
-			{
-				name: '美国签证',
-				size: '51mm×51mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon11@2x.png'
-			},
-			{
-				name: '印度签证',
-				size: '51mm×51mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon10@2x.png'
-			},
-			{
-				name: '阿根廷签证',
-				size: '40mm×mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon9@2x.png'
-			}
-		],
-		selector:[
-			{
-				name:'蓝色',
-				id: '1'
-			},
-			{
-				name:'红色',
-				id: '2'
-			},
-			{
-				name:'白色',
-				id: '3'
-			}
-		]
+		
 	}),
-	props: {}
+	props:{
+		color:{
+			type:String,
+			default:''
+		},
+		printType:{
+			type:Object,
+			default:() => ({})
+		},
+		//单张图片
+		sinPic:{
+			type:String,
+			default:''
+		},
+		//排版图片
+		tyPic:{
+			type:String,
+			default:''
+		},
+	},
+	methods:{
+		changeBackColor(backColor){
+			this.$store.commit('zjzprint/SET_COLOR',backColor)
+			uni.$emit('changeBackColor',backColor)
+		}
+	}
+	
 };
 </script>
 
@@ -187,7 +90,6 @@ export default {
 		@include font-no-height(26upx, 500, $color-99);
 	}
 	& .preview-img{
-		padding: 27upx 45upx;
 		border: 2upx solid $color-DC;
 		border-radius: 10upx;
 		image{
@@ -211,15 +113,15 @@ export default {
 				@include w-h(33.3%, 100%);
 			}
 		}
-		& .lanse{
+		& .blue{
 			background: url('http://qswy.com/static/xcximg/certificates_bgcolor_bule@2x.png') no-repeat;
 			background-size: contain;
 		}
-		& .hongse{
+		& .red{
 			background: url('http://qswy.com/static/xcximg/certificates_bgcolor_red@2x.png') no-repeat;
 			background-size: contain;
 		}
-		& .baise{
+		& .white{
 			background: url('http://qswy.com/static/xcximg/certificates_bgcolor_white@2x.png') no-repeat;
 			background-size: contain;
 		}

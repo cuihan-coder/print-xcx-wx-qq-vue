@@ -49,7 +49,7 @@ export default {
 	},
 	data() {
 		return {
-			showParam: [1, 2, 3]
+			showParam: [1,3]
 		};
 	}
 };

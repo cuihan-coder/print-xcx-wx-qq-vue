@@ -2,9 +2,9 @@
 	<view>
 		<view class="mn-A4">
 			<view class="title">
-				<image :src="picList[0].pic"></image>
-				<text>{{ picList[0].name }}</text>
-				<text>({{ picList[0].size }})</text>
+				<image :src="printType.pic"></image>
+				<text>{{ printType.name }}</text>
+				<text>({{ printType.size }})</text>
 			</view>
 			<view class="case-img"><image src="http://qswy.com/static/xcximg/certificates_example @2x.png"></image></view>
 			<view class="pic-desc">
@@ -28,8 +28,8 @@
 			</view>
 		</view>
 		<view class="upload-play-btn">
-			<image src="http://qswy.com/static/xcximg/certificates_but_shot@2x.png"></image>
-			<image src="http://qswy.com/static/xcximg/certificates_but_album@2x.png"></image>
+			<image @click="chooseImage('camera')" src="http://qswy.com/static/xcximg/certificates_but_shot@2x.png"></image>
+			<image @click="chooseImage('album')" src="http://qswy.com/static/xcximg/certificates_but_album@2x.png"></image>
 		</view>
 	</view>
 </template>
@@ -37,120 +37,58 @@
 <script>
 export default {
 	data: () => ({
-		picList: [
-			{
-				name: '一寸',
-				size: '25mm×35mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
-			},
-			{
-				name: '二寸',
-				size: '35mm×49mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
-			},
-			{
-				name: '小一寸',
-				size: '22mm×32mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
-			},
-			{
-				name: '小二寸',
-				size: '35mm×45mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
-			},
-			{
-				name: '三寸',
-				size: '55mm×84mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
-			},
-			{
-				name: '五寸',
-				size: '89mm×127mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
-			},
-			{
-				name: '身份证',
-				size: '26mm×32mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon1@2x.png'
-			},
-			{
-				name: '居住证',
-				size: '22mm×32mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon2@2x.png'
-			},
-			{
-				name: '驾驶证',
-				size: '22mm×32mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon3@2x.png'
-			},
-			{
-				name: '社保',
-				size: '26mm×32mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon4@2x.png'
-			},
-			{
-				name: '中国护照',
-				size: '33mm×48mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon5@2x.png'
-			},
-			{
-				name: '台湾通行证',
-				size: '33mm×48mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon6@2x.png'
-			},
-			{
-				name: '港澳通行证',
-				size: '33mm×48mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon8@2x.png'
-			},
-			{
-				name: '入台证',
-				size: '35mm×45mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon7@2x.png'
-			},
-			{
-				name: '入境签证',
-				size: '33mm×48mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon16@2x.png'
-			},
-			{
-				name: '通用签证',
-				size: '35mm×45mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon15@2x.png'
-			},
-			{
-				name: '来华签证',
-				size: '33mm×48mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon14@2x.png'
-			},
-			{
-				name: '泰国签证',
-				size: '35mm×45mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon13@2x.png'
-			},
-			{
-				name: '日本签证',
-				size: '45mm×45mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon12@2x.png'
-			},
-			{
-				name: '美国签证',
-				size: '51mm×51mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon11@2x.png'
-			},
-			{
-				name: '印度签证',
-				size: '51mm×51mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon10@2x.png'
-			},
-			{
-				name: '阿根廷签证',
-				size: '40mm×mm',
-				pic: 'http://qswy.com/static/xcximg/certificates_icon9@2x.png'
-			}
-		]
+	
 	}),
-	props: {}
+	props:{
+		printType:{
+			type:[Object],
+			default:()=>({})
+		}
+	},
+	methods:{
+		chooseImage(sourceType){
+			let that = this
+			
+			uni.chooseImage({
+			    count: 6, //默认9
+			    sizeType: ['original'], //可以指定是原图还是压缩图，默认二者都有
+			    sourceType: [sourceType], //从相册选择
+			    success: async function (res) {
+					uni.showLoading({
+						title: '文件上传中'
+					});
+					const tempFilePaths = res.tempFiles;
+					uni.uploadFile({
+						url: that.$api.uploadImg_url_post, //仅为示例，非真实的接口地址
+						filePath: tempFilePaths[0].path,
+						name: 'file',
+						header: { Authorization: 'Bearer ' + (await that.$helper._getCache('loginToken')) },
+						success: uploadFileRes => {
+							uni.hideLoading();
+							uploadFileRes = JSON.parse(uploadFileRes.data);
+							if (uploadFileRes.state == 'success') {
+								uni.showToast({
+									title: uploadFileRes.msg,
+									icon: 'none',
+									duration:3000
+								});
+								that.$store.commit('zjzprint/SET_IMGURL',uploadFileRes.data[0])
+								uni.navigateTo({
+									url:"/pages/print/zjzConfirm"
+								})
+								return;
+							}
+							uni.showToast({
+								title: '上传失败',
+								icon: 'none'
+							});
+						}
+					});
+			    }
+			});
+		}
+	}
+	
 };
 </script>
 

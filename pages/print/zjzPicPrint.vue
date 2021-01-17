@@ -7,7 +7,7 @@
 				<text>证件照打印</text>
 			</view>
 			<view class="a4-model-1">
-				<view class="type-entry" v-for="(item,index) in selectList.slice(0,2)" :key="index">
+				<view @click="toPage('/pages/print/zjzUpload',index)" class="type-entry" v-for="(item,index) in selectList.slice(0,2)" :key="index">
 					<image :src="item.pic"></image>
 					<view class="size-set">
 						<view>{{item.name}}</view>
@@ -16,7 +16,7 @@
 				</view>
 			</view>
 			<view class="a4-model">
-				<view class="type-entry" v-for="(item,index) in selectList.slice(2,selectList.length)" v-if="index <= loadMore" :key="index">
+				<view @click="toPage('/pages/print/zjzUpload',index+2)" class="type-entry" v-for="(item,index) in selectList.slice(2,selectList.length)" v-if="index <= loadMore" :key="index">
 					<image :src="item.pic"></image>
 					<view class="size-set">
 						<view>{{item.name}}</view>
@@ -44,118 +44,126 @@ export default {
 			selectList:[
 				{
 					name: '一寸',
-					size: '25mm×35mm',
+					size: '25mmx35mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
 				},
 				{
 					name: '二寸',
-					size: '35mm×49mm',
+					size: '35mmx49mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
 				},
 				{
 					name: '小一寸',
-					size: '22mm×32mm',
+					size: '22mmx32mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
 				},
 				{
 					name: '小二寸',
-					size: '35mm×45mm',
+					size: '35mmx45mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
 				},
 				{
 					name: '三寸',
-					size: '55mm×84mm',
+					size: '55mmx84mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
 				},
 				{
 					name: '五寸',
-					size: '89mm×127mm',
+					size: '89mmx127mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
 				},
 				{
 					name: '身份证',
-					size: '26mm×32mm',
+					size: '26mmx32mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon1@2x.png'
 				},
 				{
 					name: '居住证',
-					size: '22mm×32mm',
+					size: '22mmx32mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon2@2x.png'
 				},
 				{
 					name: '驾驶证',
-					size: '22mm×32mm',
+					size: '22mmx32mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon3@2x.png'
 				},
 				{
 					name: '社保',
-					size: '26mm×32mm',
+					size: '26mmx32mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon4@2x.png'
 				},
 				{
 					name: '中国护照',
-					size: '33mm×48mm',
+					size: '33mmx48mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon5@2x.png'
 				},
 				{
 					name: '台湾通行证',
-					size: '33mm×48mm',
+					size: '33mmx48mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon6@2x.png'
 				},
 				{
 					name: '港澳通行证',
-					size: '33mm×48mm',
+					size: '33mmx48mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon8@2x.png'
 				},
 				{
 					name: '入台证',
-					size: '35mm×45mm',
+					size: '35mmx45mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon7@2x.png'
 				},
 				{
 					name: '入境签证',
-					size: '33mm×48mm',
+					size: '33mmx48mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon16@2x.png'
 				},
 				{
 					name: '通用签证',
-					size: '35mm×45mm',
+					size: '35mmx45mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon15@2x.png'
 				},
 				{
 					name: '来华签证',
-					size: '33mm×48mm',
+					size: '33mmx48mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon14@2x.png'
 				},
 				{
 					name: '泰国签证',
-					size: '35mm×45mm',
+					size: '40mmx60mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon13@2x.png'
 				},
 				{
 					name: '日本签证',
-					size: '45mm×45mm',
+					size: '45mmx45mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon12@2x.png'
 				},
 				{
 					name: '美国签证',
-					size: '51mm×51mm',
+					size: '51mmx51mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon11@2x.png'
 				},
 				{
 					name: '印度签证',
-					size: '51mm×51mm',
+					size: '51mmx51mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon10@2x.png'
 				},
 				{
 					name: '阿根廷签证',
-					size: '40mm×mm',
+					size: '40mmx40mm',
 					pic: 'http://qswy.com/static/xcximg/certificates_icon9@2x.png'
 				}
 			],
 			//是否加载更多，默认展示下标到2 
 			loadMore: 2
 		};
+	},
+	methods:{
+		toPage(url,index) {
+			this.$store.commit('zjzprint/SET_PRINTTYPEINDEX',this.selectList[index])
+			uni.navigateTo({
+				url: url
+			});
+		}
 	}
 };
 </script>
