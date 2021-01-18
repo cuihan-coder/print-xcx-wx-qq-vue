@@ -39,7 +39,6 @@ export default {
 		//图片上传成功
 		uni.$on('picUploadSucToImgurl', async function(imgUrl) {
 			that.imgUrl = imgUrl;
-			console.log(that.color);
 			//创建打印任务记录
 			let postData = {
 				imgUrl,

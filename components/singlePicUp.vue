@@ -5,12 +5,12 @@
 			{{titleParam.name}}
 		</view>
 		<view class="a4-model">
-			<!-- <view class="no-file">
+			<view class="no-file" v-if="imgUrl == '' " @click="uploadPic()">
 				<image src="http://qswy.com/static/xcximg/certificates_img@2x.png"></image>
 				<view>点击添加图片</view>
-			</view> -->
-			<image class="file-img" src="http://qswy.com/static/xcximg/byz.png"></image>
-			<image class="trush" src="http://qswy.com/static/xcximg/certificates_del@2x.png"></image>
+			</view>
+			<image v-if="imgUrl"  class="file-img" :src="imgUrl"></image>
+			<image v-if="imgUrl" @click="delImg()" class="trush" src="http://qswy.com/static/xcximg/certificates_del@2x.png"></image>
 		</view>
 	</view>
 </template>
@@ -27,6 +27,50 @@ export default {
 					pic: ''
 				}
 			} 
+		},
+	},
+	data:() => ({
+		imgUrl:''
+	}),
+	methods:{
+		//上传图片
+		uploadPic() {
+			let that = this;
+			uni.chooseImage({
+				count: 1, //默认1
+				sizeType: ['original'], //可以指定是原图还是压缩图，默认二者都有
+				sourceType: ['album', 'camera'], //从相册选择
+				success: async function(res) {
+					uni.showLoading({
+						title: '文件上传中'
+					});
+					await uni.uploadFile({
+						url: that.$api.uploadImg_url_post,
+						filePath: res.tempFilePaths[0],
+						name: 'file',
+						header: { Authorization: 'Bearer ' + (await that.$helper._getCache('loginToken')) },
+						success: uploadFileRes => {
+							uploadFileRes = JSON.parse(uploadFileRes.data);
+							if (uploadFileRes.state == 'success') {
+								that.imgUrl = uploadFileRes.data[0]
+								
+								uni.$emit('uploadPic',that.imgUrl)
+								
+								return;
+							}
+							uni.showToast({
+								title: '上传失败',
+								icon: 'none'
+							});
+						}
+					});
+					uni.hideLoading();
+				}
+			});
+		},
+		delImg(){
+			this.imgUrl = ''
+			uni.$emit('delImg','')
 		}
 	}
 };

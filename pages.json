@@ -144,10 +144,18 @@
 		{
 			"path": "pages/print/dtpPicPrint",
 			"style": {
-				"navigationBarTitleText": "多图片打印",
+				"navigationBarTitleText": "多图片打印A4",
 				"navigationBarBackgroundColor": "#FFFFFF"
 			}
 		},
+		{
+			"path": "pages/print/dtpPicPrintxz",
+			"style": {
+				"navigationBarTitleText": "多图片打印相纸",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		
 		{
 			"path": "pages/print/picPrintEntry",
 			"style": {

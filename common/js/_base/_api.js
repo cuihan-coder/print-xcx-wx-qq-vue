@@ -43,5 +43,6 @@ module.exports = {
 	createPicPrintTask_url_post: `${host[development]}/api/Pub/createPicPrintTask` ,
 	//更新自定义图片打印 左 上 高数据
 	updatePicPrintSelfdfinedParam_url_post: `${host[development]}/api/Pub/updatePicPrintSelfdfinedParam` ,
-
+	//多图片任务 建立打印任务记录
+	morePicPrintTaskCreate_url_post: `${host[development]}/api/Pub/morePicPrintTaskCreate` ,
 }

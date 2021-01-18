@@ -36,15 +36,29 @@ export default {
 		//设备名称
 		device_name: '请扫码'
 	}),
+	computed:{
+		STORE_INDEX_DEVICEINFO(){
+			return this.$store.state.deviceInfo
+		},
+		STORE_INDEX_GROUPINFO(){
+			return this.$store.state.groupInfo
+		}
+	},
+	watch:{
+		STORE_INDEX_DEVICEINFO(val){
+			this.device_name = val.name
+		},
+		STORE_INDEX_GROUPINFO(val){
+			this.group_name = val.goup_name
+		}
+	},
 	created(){
 		if(this.$store.state.groupInfo){
 			this.changeInit(this)
 		}
 	},
 	beforeDestroy(){
-		
 		if(this.$store.state.groupInfo){
-			console.log(this.$store.state.groupInfo,'jll')
 			this.changeInit(this)
 		}
 	},

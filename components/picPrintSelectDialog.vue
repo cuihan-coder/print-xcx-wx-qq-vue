@@ -1,7 +1,7 @@
 <template>
 	<view class="dialog" v-if="isShow == true">
 		<view class="background-ceng" @click="`${$store.commit('home/SET_PRINTDIALOGSHOW', false)}`"></view>
-		<view @click="toPage('/pages/print/dtpPicPrint')" class="orange-back">
+		<view @click="toPage('/pages/print/dtpPicPrintxz')" class="orange-back">
 			<view>图片打印至</view>
 			<view>6寸相纸</view>
 		</view>

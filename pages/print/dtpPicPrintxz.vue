@@ -60,7 +60,7 @@ export default {
 			}
 			let postData = {
 				document_type: 2, //2 相片打印
-				isA4: 1, //相片打印至A4
+				isA4: 0, //相片打印至相纸
 				color: this.color,
 				printNum: this.printNum * this.imgSrcs.length
 			};
@@ -75,7 +75,7 @@ export default {
 			//加载价格
 			let postData = {
 				document_type: 2, //2 相片打印
-				isA4: 1, //相片打印至A4
+				isA4: 0, //相片打印至相纸A4
 				color: that.color,
 				printNum: that.printNum * that.imgSrcs.length
 			};
@@ -93,7 +93,7 @@ export default {
 				imgUrls: that.imgSrcs,
 				color: that.color,
 				printNum: that.printNum,
-				pic_is_a4: 1
+				pic_is_a4: 0
 			});
 			if(res.state == 'error'){
 				uni.showToast({
