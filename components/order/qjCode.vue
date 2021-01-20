@@ -1,11 +1,20 @@
 <template>
 	<view class="qjcode">
 		<view>到店取件码</view>
-		<view>882211</view>
+		<view>{{receive_code}}</view>
 	</view>
 </template>
 
-<script></script>
+<script>
+	export default{
+		props:{
+			receive_code:{
+				type:String,
+				default:''
+			}
+		}
+	}
+</script>
 
 <style lang="scss">
 .qjcode{

@@ -71,6 +71,14 @@
 			}
 		},
 		{
+			"path": "pages/service/helpInfo",
+			"style": {
+				"navigationBarTitleText": "使用帮助",
+				"navigationBarBackgroundColor": "#FFFFFF"
+			}
+		},
+		
+		{
 			"path": "pages/userModule/voucher",
 			"style": {
 				"navigationBarTitleText": "优惠券",

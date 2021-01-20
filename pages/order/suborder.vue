@@ -298,7 +298,7 @@ export default {
 			// #ifdef MP-QQ
 			qq.chooseMessageFile({
 			  count: 1,
-			  type: 'all',
+			  type:'file',
 			  async success (res) {
 			    const tempFilePaths = res.tempFiles
 				that.startUPload(res, that);
@@ -310,6 +310,7 @@ export default {
 			
 			wx.chooseMessageFile({
 				count: 1,
+				type:'file',
 				async success(res) {
 					that.startUPload(res, that);
 				}

@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
-		<view class="voucher-cont">
-			<text class="title">QQ文档如何分享到微信</text>
+		<view class="voucher-cont" v-for="(item,index) in list" @click="toPage('/pages/service/helpInfo?info='+ encodeURIComponent(JSON.stringify(item)))">
+			<text class="title">{{item.title}}</text>
 			<image src="http://qswy.com/static/xcximg/file_more@2x.png"></image>
 		</view>
 	</view>
@@ -11,11 +11,23 @@
 export default {
 	data() {
 		return {
+			list:[]
 		};
 	},
 	async onLoad() {
+		let ret = await this.$helper.httpGet(this.$api.helpArt_url_get)
+		if(ret.state == 'success'){
+			this.list = ret.data.list
+		}
 	},
-	methods: {}
+	methods: {
+		toPage(url){
+			console.log(url)
+			uni.navigateTo({
+				url:url
+			})
+		}
+	}
 };
 </script>
 

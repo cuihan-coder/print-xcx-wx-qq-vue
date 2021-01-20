@@ -5,37 +5,34 @@
 			<view class="pay-icon"><image src="http://qswy.com/static/xcximg/me_wallet@2x.png"></image></view>
 			<view class="balance">
 				<text>¥</text>
-				<text>320.00</text>
+				<text>{{userInfo.balance}}</text>
 			</view>
 			<view class="blance-desc">可用账户余额</view>
 			<view class="cz-title">充值</view>
 			<view class="money-list">
-				<view class="money-item">
-					<view>10元</view>
-				</view>
-				<view class="money-item">
-					<view>20元</view>
-					<view>充值送2元</view>
-				</view>
-				<view class="money-item">
-					<view>50元</view>
-					<view>充值送5元</view>
+				<view class="money-item" v-for="(item,index) in toupList" @click="topup(item.money)">
+					<view>{{item.money}}元</view>
+					<view>{{item.title}}</view>
 				</view>
 			</view>
 			<image class="banner-image" src="http://qswy.com/static/xcximg/banner_2@2x.png"></image>
 		</view>
 		<view class="money-log-list">
 			<view class="title">消费明细</view>
-			<zhichu
-			typeName="证件照打印"
-			money="1.00"
-			ctime="2019-08-29 18:29:21"
-			></zhichu>
-			<tuikuan
-			typeName="证件照打印-退款"
-			money="1.00"
-			ctime="2019-08-29 18:29:21"
-			></tuikuan>
+			<view v-for="(item,index) in log" :key="index">
+				<zhichu
+				v-if="item.type == 1"
+				:typeName="item.pay_type_content"
+				:money="item.money"
+				:ctime="item.created_at"
+				></zhichu>
+				<tuikuan
+				v-if="item.type == 2"
+				:typeName="item.pay_type_content + '-退款'"
+				:money="item.money"
+				:ctime="item.created_at"
+				></tuikuan>
+			</view>
 		</view>
 	</view>
 </template>
@@ -43,16 +40,60 @@
 <script>
 import zhichu from "@/components/balance/zhichu.vue"
 import tuikuan from "@/components/balance/tuikuan.vue"
+import payModel from '../../common/js/pay.js';
+
 export default {
 	components:{
 		zhichu,
 		tuikuan
 	},
 	data() {
-		return {};
+		return {
+			userInfo:{},
+			toupList:{},
+			log:[]
+		};
 	},
-	onLoad() {},
-	methods: {}
+	async onLoad() {
+		
+		let ret = await this.$helper.httpGet(this.$api.topupInfo_url_get)
+		if(ret.state == 'success'){
+			this.log = ret.data.log
+			this.toupList = ret.data.toupList
+			this.userInfo = ret.data.userInfo
+		}
+	},
+	methods: {
+		async topup(money){
+			let post = {
+				money
+			}
+			let ret = await this.$helper.httpPost(this.$api.userTopup_url_post,post)
+			if(ret.state == 'success'){
+				// #ifdef MP-WEIXIN
+				let state = await payModel.wxPay(ret.data)
+				if(state == true){
+					uni.navigateTo({
+						url:'/pages/print/payOk'
+					})
+				}
+				// #endif
+				// #ifdef MP-QQ
+				qq.requestWxPayment({
+				  url:ret.data.mweb_url,
+				  referer: ret.data.referer,
+				  success(res) {
+					  uni.navigateTo({
+					  	url:'/pages/print/payOk'
+					  })
+				  },
+				  fail(res) {}
+				})
+				// #endif
+			}
+			
+		}
+	}
 };
 </script>
 

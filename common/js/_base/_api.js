@@ -45,4 +45,23 @@ module.exports = {
 	updatePicPrintSelfdfinedParam_url_post: `${host[development]}/api/Pub/updatePicPrintSelfdfinedParam` ,
 	//多图片任务 建立打印任务记录
 	morePicPrintTaskCreate_url_post: `${host[development]}/api/Pub/morePicPrintTaskCreate` ,
+	//修改用户信息
+	updateUserInfo_url_post: `${host[development]}/api/user/updateUserInfo` ,
+	//用户首页数据
+	userInitData_url_get: `${host[development]}/api/user/userInitData` ,
+	//订单列表
+	orderList_url_get: `${host[development]}/api/Order/orderList` ,
+	//取消订单
+	cancelOrder_url_post: `${host[development]}/api/Order/cancelOrder` ,
+	//打印详情
+	orderInfo_url_get: `${host[development]}/api/Order/orderInfo` ,
+	//退款申请
+	orderRefund_url_post: `${host[development]}/api/Order/orderRefund` ,
+	//帮助文档
+	helpArt_url_get: `${host[development]}/api/Pub/helpArt` ,
+	//充值界面信息
+	topupInfo_url_get: `${host[development]}/api/User/topupInfo` ,
+	//充值吊起签名
+	userTopup_url_post: `${host[development]}/api/User/userTopup` ,
+	
 }

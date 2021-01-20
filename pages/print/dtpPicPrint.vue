@@ -93,7 +93,8 @@ export default {
 				imgUrls: that.imgSrcs,
 				color: that.color,
 				printNum: that.printNum,
-				pic_is_a4: 1
+				pic_is_a4: 1,
+				template_num: 21
 			});
 			if(res.state == 'error'){
 				uni.showToast({

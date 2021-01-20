@@ -79,7 +79,8 @@ export default {
 				imgUrl:that.imgUrl ,
 				color: that.color,
 				printNum: that.printNum,
-				pic_is_a4: 1
+				pic_is_a4: 1,
+				template_num:3
 			};
 			let res = await that.$helper.httpPost(that.$api.createPicPrintTask_url_post, postData);
 			if (res.state == 'error') {

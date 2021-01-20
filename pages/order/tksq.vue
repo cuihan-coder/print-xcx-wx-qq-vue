@@ -3,44 +3,24 @@
 		<view class="voucher-cont" v-if="typeList[0] != undefined">
 			<text class="title">理由</text>
 			<view class="selector">
-				<picker class="picker-style" mode="selector" :range="typeList" range-key="name">{{ typeName }}</picker>
+				<picker class="picker-style" mode="selector" @change="selectVoucher" :range="typeList" range-key="name">{{ typeName }}</picker>
 				<image src="http://qswy.com/static/xcximg/file_more@2x.png"></image>
 			</view>
 		</view>
 		<view class="leave-msg">
 			<view>备注</view>
-			<textarea maxlength="1000" placeholder="请备注信息（详细说明，或联系方式等）"></textarea>
+			<textarea maxlength="1000" v-model="content" placeholder="请备注信息（详细说明，或联系方式等）"></textarea>
 			<view class="uplaod-img">
-				<view class="img-cont">
+				<view class="img-cont" v-for="(item,index) in imgUrl" :key="index">
 					<!-- 叉 -->
 					<image src="http://qswy.com/static/xcximg/certificates_del_s@2x.png"></image>
 					<!-- 上传图片 -->
-					<image src="http://qswy.com/static/xcximg/huodong.jpeg"></image>
+					<image :src="item"></image>
 				</view>
-				<view class="img-cont">
-					<!-- 叉 -->
-					<image src="http://qswy.com/static/xcximg/certificates_del_s@2x.png"></image>
-					<!-- 上传图片 -->
-					<image src="http://qswy.com/static/xcximg/huodong.jpeg"></image>
-				</view>
-				<view class="img-cont">
-					<!-- 叉 -->
-					<image src="http://qswy.com/static/xcximg/certificates_del_s@2x.png"></image>
-					<!-- 上传图片 -->
-					<image src="http://qswy.com/static/xcximg/huodong.jpeg"></image>
-				</view>
-				<view class="img-cont">
-					<!-- 叉 -->
-					<image src="http://qswy.com/static/xcximg/certificates_del_s@2x.png"></image>
-					<!-- 上传图片 -->
-					<image src="http://qswy.com/static/xcximg/huodong.jpeg"></image>
-				</view>
-				<view class="add-img">+</view>
-				
+				<view @click="uploadPic()" class="add-img">+</view>
 			</view>
-			
 		</view>
-		<view class="ok-btn">确定提交</view>
+		<view class="ok-btn" @click="refundsub">确定提交</view>
 	</view>
 </template>
 
@@ -62,13 +42,82 @@ export default {
 					id: 3
 				}
 			],
-			typeName: ''
+			typeName: '',
+			taskId:'',
+			content:'',
+			imgUrl:[]
 		};
 	},
-	async onLoad() {
+	async onLoad(option) {
+		this.taskId = option.taskId
 		this.typeName = this.typeList[0].name;
 	},
-	methods: {}
+	methods: {
+		selectVoucher: function(e) {
+			this.typeName = this.typeList[e.target.value]['name']
+		},
+		async refundsub(){
+			if(this.content == ''){
+				uni.showToast({
+					title:'请填写备注信息，如联系方式',
+					icon:'none'
+				})
+				return
+			}
+			let postData = {
+				taskId:this.taskId,
+				content:this.content,
+				type:this.typeName,
+				imgUrl: this.imgUrl.join(',')
+			}
+			let ret = await this.$helper.httpPost(this.$api.orderRefund_url_post,postData);
+			if(ret.state == 'success'){
+				uni.showToast({
+					title:ret.msg,
+					duration:3000,
+					icon:'none'
+				})
+			}
+		},
+		uploadPic() {
+			let that = this;
+			uni.chooseImage({
+				count: 3, //默认3
+				sizeType: ['original'], //可以指定是原图还是压缩图，默认二者都有
+				sourceType: ['album', 'camera'], //从相册选择
+				success: async function(res) {
+					uni.showLoading({
+						title: '文件上传中'
+					});
+					
+					//上传文件到后台
+					uni.uploadFile({
+						url: that.$api.uploadImg_url_post, //仅为示例，非真实的接口地址
+						filePath: res.tempFilePaths[0],
+						name: 'file',
+						header: { Authorization: 'Bearer ' + (await that.$helper._getCache('loginToken')) },
+						success: uploadFileRes => {
+							uni.hideLoading();
+							uploadFileRes = JSON.parse(uploadFileRes.data);
+							if (uploadFileRes.state == 'success') {
+								uni.showToast({
+									title: uploadFileRes.msg,
+									icon: 'none',
+									duration:3000
+								});
+								that.imgUrl.push(uploadFileRes.data[0])
+								return;
+							}
+							uni.showToast({
+								title: '上传失败',
+								icon: 'none'
+							});
+						}
+					});
+				}
+			});
+		}
+	}
 };
 </script>
 

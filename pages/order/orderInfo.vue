@@ -3,80 +3,107 @@
 		<view class="order-info">
 			<view class="print-name">
 				<view class="print-name-1">
-					<image src="http://qswy.com/static/xcximg/file_word@2x.png"></image>
-					年终报告.docd
+					<!-- pptx -->
+					<image v-if="info.file_ext == 'pptx' || info.file_ext == 'ppt'" class="img-icon" src="http://qswy.com/static/xcximg/file_ppt@2x.png"></image>
+					<!-- xlsx -->
+					<image v-if="info.file_ext == 'xlsx' || info.file_ext == 'xls'" class="img-icon" src="http://qswy.com/static/xcximg/file_exl@2x.png"></image>
+					<!-- doc -->
+					<image v-if="info.file_ext == 'doc' || info.file_ext == 'docx'" class="img-icon" src="http://qswy.com/static/xcximg/file_word@2x.png"></image>
+					<!-- pdf -->
+					<image v-if="info.file_ext == 'pdf'" class="img-icon" src="http://qswy.com/static/xcximg/file_pdf@2x.png"></image>
+					<!-- 图片打印 -->
+					<image v-if="~['png','jpg','jpeg'].indexOf(info.file_ext) != 0" class="img-icon" src="http://qswy.com/static/xcximg/certificates_s_5@2x.png"></image>
+					{{info.file_name}}
 				</view>
 				<!-- <text class="ydy">已打印</text> -->
 				<!-- <text class="ddy">待打印</text> -->
 				<!-- <text class="dzf">待支付</text> -->
 				<!-- 	<text class="clz">处理中</text> -->
 				<!-- 	<text class="tksb">退款失败</text> -->
-				<text class="ytk">已退款</text>
+				<text v-if="info.is_print == 1" class="ydy">已打印</text>
+				<text v-if="info.is_print == 0 && info.is_pay == 1" class="ddy">待打印</text>
+				<text v-if="info.is_pay == 0 "  class="dzf">待支付</text>
+				<text  v-if="info.is_pay == 1 && info.is_tk == 1" class="clz">处理中</text>
+				<text  v-if="info.is_pay == 1 && info.is_tk == 3"  class="tksb">退款失败</text>
 			</view>
 			<view class="print-type-info">
 				<view class="title">类别一</view>
 				<view class="type-detail">
 					<view class="item">
 						<text>项目：</text>
-						<text>A4/黑白/单面/1份 共5张</text>
+						<text>{{info.detail}}</text>
 					</view>
 					<view class="item">
 						<text>单价：</text>
-						<text>0.50元/份</text>
+						<text>{{info.avg_price}}元/份</text>
 					</view>
 					<view class="item">
 						<text>小计：</text>
-						<text>15.00元</text>
+						<text>{{info.price}}元</text>
 					</view>
 				</view>
 			</view>
 			<view class="money-heji">
-				<text>共56张</text>
+				<text>共{{(info.end_page - info.start_page + 1 ) * info.printNum}}面</text>
 				<text>总小计：</text>
-				<text>20.50元</text>
+				<text>{{info.price}}元</text>
 			</view>
-			<view class="detail-desc">编号：1000003232099095</view>
-			<view class="detail-desc">时间：2020-12-06 15:44</view>
-			<view class="detail-desc">优惠：-1.00元</view>
+			<view class="detail-desc">编号：{{info.order_no}}</view>
+			<view class="detail-desc">时间：{{info.created_at}}</view>
+			<view class="detail-desc">优惠：{{info.voucher_money}}元</view>
 			<view class="sj-pay">
 				<text>实付：</text>
-				<text>19.50元</text>
+				<text>{{info.price - info.voucher_money}}元</text>
 			</view>
 		</view>
 		<!-- 待打印出现 -->
-		<view class="ddy-block">
+		<view class="ddy-block" v-if="info.is_pay == 1 && info.is_print == 0">
 			<view class="ddqjm">
 				<view>到店取件码</view>
-				<view>882211</view>
+				<view>{{info.receive_code}}</view>
 			</view>
-			<navigator open-type="navigate" url="/pages/order/tksq" class="sq-tuikuan">申请退款</navigator>
+			<navigator open-type="navigate" :url="'/pages/order/tksq?taskId='+info.id" class="sq-tuikuan">申请退款</navigator>
 		</view>
 
 		<!-- 待支付 -->
-		<!-- <view class="ljzf">
-			<navigator class="btn">立即支付</navigator>
-			<navigator class="sq-tuikuan">申请退款</navigator>
-		</view> -->
+		<view class="ljzf" v-if="info.is_pay == 0 && info.is_print == 0">
+			<navigator :url="'/pages/print/payPrint?main_id=' + info.main_order_id + '&task_id=' + info.id" class="btn">立即支付</navigator>
+		</view>
 
 		<!-- 已打印出现 -->
-		<!-- <view class="ydy-block">
-			<navigator class="sq-tuikuan">申请退款</navigator>
-		</view> -->
+		<view class="ydy-block" v-if="info.is_pay ==1 && info.is_print == 1">
+			<navigator class="sq-tuikuan" :url="'/pages/order/tksq?taskId='+info.id">申请退款</navigator>
+		</view>
 		<!-- 处理中出现 -->
-		<!-- <view class="clz-tip">
+		<view class="clz-tip"  v-if="info.is_pay ==1 && info.is_tk == 1">
 			已提交退款申请，请耐心等待客服审核，如审核通过， 资金将原路返回。
-		</view> -->
+		</view>
 		<!-- 退款失败出现 -->
-		<!-- 		<view class="tksb-tip">很抱歉，经审核，机器没有出现问题，您的退款失败。 如不接受，可再次提交退款申请。</view>
- -->
+		<view class="tksb-tip" v-if="info.is_pay ==1 && info.is_tk == 3">很抱歉，经审核，机器没有出现问题，您的退款失败。 如不接受，可再次提交退款申请。</view>
+
 		<!-- 已退款出现 -->
-		<!-- <view class="tksb-tip">已退款，资金原路返回。</view> -->
+		<view class="tksb-tip" v-if="info.is_pay ==1 && info.is_tk == 2">已退款，资金原路返回。</view>
 	</view>
 </template>
 
 <script>
 export default {
-	data() {}
+	data() {
+		return {
+			taskId: '',
+			info:{}
+		}
+	},
+	async onLoad(option) {
+		this.taskId = option.taskId
+		let query = this.$helper.objToQuery({
+			taskId:this.taskId
+		});
+		let ret = await this.$helper.httpGet(this.$api.orderInfo_url_get + query);
+		if(ret.state == 'success'){
+			this.info = ret.data.info
+		}
+	}
 };
 </script>
 

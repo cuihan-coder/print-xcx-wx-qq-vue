@@ -1,11 +1,29 @@
 <template>
 	<view class="cancelorpay">
-		<view>取消订单</view>
-		<view>立即支付</view>
+		<view @click="cancelOrder">取消订单</view>
+		<view @click="payOrder">立即支付</view>
 	</view>
 </template>
 
-<script></script>
+<script>
+	export default{
+		props:{
+			index:{
+				type:[String,Number],
+				default:-1
+			}
+		},
+		methods:{
+			cancelOrder(){
+				uni.$emit('cancelOrder',this.index)
+			},
+			payOrder(){
+				uni.$emit('payOrder',this.index	)
+			}
+			
+		}
+	}
+</script>
 
 <style lang="scss">
 .cancelorpay{

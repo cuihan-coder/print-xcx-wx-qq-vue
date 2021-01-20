@@ -44,8 +44,9 @@ export default {
 						//组ID与设备对应组ID不一致，则进行绑定设备对于的组ID，并且更新用户的组ID
 						if (ret.data.token) {
 							userInfo.group_id = ret.data.groupInfo.id;
-							that.$helper._setCache('userInfo', userInfo);
-							that.$helper._setCache('loginToken', token);
+							that.$helper._setCache('userInfo', ret.data.userInfo);
+							console.log(ret.data.token)
+							that.$helper._setCache('loginToken', ret.data.token);
 						}
 					} else {
 						uni.showToast({

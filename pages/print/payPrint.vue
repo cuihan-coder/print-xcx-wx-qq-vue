@@ -89,6 +89,7 @@ export default {
 	data() {
 		return {
 			main_id: 0,
+			task_id:0,
 			is_show_detail:false,
 			voucherList: [],
 			voucherName: '',
@@ -106,7 +107,7 @@ export default {
 			orderMoney: 0,
 			//原始价格
 			originalMoney:0,
-			pageNum: 0
+			pageNum: 0,
 		};
 	},
 	computed:{
@@ -129,6 +130,7 @@ export default {
 	},
 	async onLoad(option) {
 		let main_id = this.main_id =  option.main_id;
+		let task_id = this.task_id = option.task_id ? option.task_id : 0
 		let userInfo = await this.$helper._getCache('userInfo')
 		if(userInfo.member_type == 1){
 			this.default_pay = 'wxpay'
@@ -140,22 +142,34 @@ export default {
 		// this.getOrderInfo(this.voucherIndex,this.default_pay)
 		let that = this
 		uni.$on('paySub', async function(){
-			let ret = await that.$helper.httpPost(that.$api.paySign_url_post,
-			{main_id:that.main_id,
-			voucher_index:that.voucherIndex,
-			default_pay: that.default_pay
-			});
+			let postData = {
+				main_id:that.main_id,
+				voucher_index:that.voucherIndex,
+				default_pay: that.default_pay
+			}
+			if(that.task_id != 0){
+				postData.pay_task_id = that.task_id
+			}
+			let ret = await that.$helper.httpPost(that.$api.paySign_url_post,postData);
+			
 			uni.showToast({
 				title: ret.msg,
 				icon: 'none',
 				duration:3000
 			});
+			if(ret.state == 'success' && that.default_pay == 'balance'){
+				if(state == true){
+					uni.navigateTo({
+						url:'/pages/print/payOk'
+					})
+				}
+			}
 			if (ret.state == 'success' && that.default_pay == 'wxpay') {
 				// #ifdef MP-WEIXIN
 				let state = await payModel.wxPay(ret.data)
 				if(state == true){
-					uni.showToast({
-						title:'支付成功'
+					uni.navigateTo({
+						url:'/pages/print/payOk'
 					})
 				}
 				// #endif

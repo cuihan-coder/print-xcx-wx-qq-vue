@@ -2,15 +2,19 @@
 	<view class="content">
 		<view class="top-back">
 			<view class="title">青速文印</view>
-			<view class="userinfo">
-				<image class="userinfo-image" src="http://qswy.com/static/xcximg/currency_wancheng@2x.png"></image>
+			<view class="userinfo" v-if="userInfo.nickname && userInfo.headimgurl">
+				<image class="userinfo-image" :src="userInfo.headimgurl"></image>
 				<view class="userinfo-right">
 					<view class="userinfo-name-vip">
-						李天霸
-						<image class="image" src="http://qswy.com/static/xcximg/me_vip@2x.png"></image>
+						{{userInfo.nickname}}
+						<image v-if="userInfo.member_type == 2" class="image" src="http://qswy.com/static/xcximg/me_vip@2x.png"></image>
 					</view>
-					<view class="userinfo-phone">18000012234</view>
+<!-- 					<view v-if="userInfo.mobile" class="userinfo-phone">{{userInfo.mobile}}</view>
+					<button class="mobile-btn" v-if="userInfo.mobile == ''" open-type="getPhoneNumber" @getphonenumber="getphonenumber">同步手机号</button> -->
 				</view>
+			</view>
+			<view class="userinfo" v-if="!userInfo.nickname && !userInfo.headimgurl">
+				<button open-type="getUserInfo" @getuserinfo="getUserInfo"	>点击获取用户头像</button>
 			</view>
 		</view>
 		<view class="container">
@@ -28,7 +32,7 @@
 						<view>待支付</view>
 					</navigator>
 					<navigator class="my-play-btn" open-type="navigate" url="/pages/order/orderList?tab=2">
-						<view class="tip-num">99</view>
+						<view class="tip-num">{{waitPrintNum}}</view>
 						<image class="btn-img" src="http://qswy.com/static/xcximg/me_order_2@2x.png"></image>
 						<view>待打印</view>
 					</navigator>
@@ -102,15 +106,53 @@ export default {
 	},
 	data() {
 		return {
-			title: 'Hello'
+			userInfo:{},
+			//待打印数量
+			waitPrintNum:0
 		};
 	},
-	onLoad() {},
+	async onLoad() {
+		this.userInfo =  await this.$helper._getCache('userInfo')
+		//获取用户的相关信息
+		let ret = await this.$helper.httpGet(this.$api.userInitData_url_get)
+		if(ret.state == 'success'){
+			this.waitPrintNum = ret.data.waitPrintNum
+		}
+	},
+	
 	methods: {
 		toPage(url) {
 			uni.navigateTo({
 				url: url
 			});
+		},
+		async getUserInfo(e){
+			let ret = await this.$helper.httpPost(this.$api.updateUserInfo_url_post,{updateInfo:{
+				headimgurl:e.detail.userInfo.avatarUrl,
+				city:e.detail.userInfo.city,
+				country:e.detail.userInfo.country,
+				sex:e.detail.userInfo.gender,
+				nickname: e.detail.userInfo.nickName,
+				province:e.detail.userInfo.province,
+			}})
+			if(ret.state == 'success'){
+				this.userInfo = ret.data.userInfo
+				this.$helper._setCache('tokenExpireTime', ret.data.expireTime)
+				this.$helper._setCache('loginToken', ret.data.token)
+				this.$helper._setCache('userInfo', ret.data.userInfo)
+			}
+		},
+		async getphonenumber(e){
+			console.log(e)
+			let ret = await this.$helper.httpPost(this.$api.updateUserInfo_url_post,{updateInfo:{
+				mobile:e.detail.userInfo.avatarUrl,
+			}})
+			if(ret.state == 'success'){
+				this.userInfo = ret.data.userInfo
+				this.$helper._setCache('tokenExpireTime', ret.data.expireTime)
+				this.$helper._setCache('loginToken', ret.data.token)
+				this.$helper._setCache('userInfo', ret.data.userInfo)
+			}
 		}
 	}
 };
@@ -161,6 +203,9 @@ page {
 			& .userinfo-phone {
 				@include font-no-height(28upx, 400, $color-99);
 			}
+		}
+		& .mobile-btn{
+			@include font-no-height(24upx, 500, $color-4F79FF);
 		}
 	}
 

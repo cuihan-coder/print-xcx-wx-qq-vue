@@ -1,44 +1,47 @@
 <template>
 	<view class="content">
-		<view v-if="option.tab == 1" class="change-menu daizhifu">
-			<view class="active">待支付</view>
-			<view class="border-line">待打印</view>
-			<view class="border-line">已打印</view>
-			<view>售后</view>
+		<view v-if="tab == 1" class="change-menu daizhifu">
+			<view @click="tab = 1" class="active">待支付</view>
+			<view @click="tab = 2" class="border-line">待打印</view>
+			<view @click="tab = 3" class="border-line">已打印</view>
+			<view @click="tab = 4">售后</view>
 		</view>
-		<view v-if="option.tab == 2" class="change-menu daiday">
-			<view>待支付</view>
-			<view class="active"> 待打印</view>
-			<view class="border-line">已打印</view>
-			<view>售后</view>
+		<view v-if="tab == 2" class="change-menu daiday">
+			<view @click="tab = 1">待支付</view>
+			<view @click="tab = 2" class="active">待打印</view>
+			<view @click="tab = 3" class="border-line">已打印</view>
+			<view @click="tab = 4">售后</view>
 		</view>
-		<view v-if="option.tab == 3" class="change-menu yiday">
-			<view class="border-line">待支付</view>
-			<view> 待打印</view>
-			<view class="active">已打印</view>
-			<view>售后</view>
+		<view v-if="tab == 3" class="change-menu yiday">
+			<view @click="tab = 1" class="border-line">待支付</view>
+			<view @click="tab = 2">待打印</view>
+			<view @click="tab = 3" class="active">已打印</view>
+			<view @click="tab = 4">售后</view>
 		</view>
-		<view v-if="option.tab == 4" class="change-menu shouhou">
-			<view class="border-line">待支付</view>
-			<view class="border-line"> 待打印</view>
-			<view>已打印</view>
-			<view class="active">售后</view>
+		<view v-if="tab == 4" class="change-menu shouhou">
+			<view @click="tab = 1" class="border-line">待支付</view>
+			<view @click="tab = 2" class="border-line">待打印</view>
+			<view @click="tab = 3">已打印</view>
+			<view @click="tab = 4" class="active">售后</view>
 		</view>
-		<view class="order-item">
-			<ordedetail></ordedetail>
+		<view v-for="(item, index) in list" class="order-item" :key="index">
+			<ordedetail
+				:file_name="item.file_name"
+				:file_ext="item.file_ext"
+				:is_print="item.is_print"
+				:is_pay="item.is_pay"
+				:is_tk="item.is_tk"
+				:detail="item.detail"
+				:price="item.price"
+				:ctime="item.created_at"
+				:voucherMoney="item.voucher_money"
+				:taskId="item.id"
+			></ordedetail>
 			<!-- 支付取消 -->
-			<cancelorpay></cancelorpay>
+			<cancelorpay v-if="item.is_pay == 0" :index="index"></cancelorpay>
 			<!-- 取件码 -->
-			<!-- <qjCode></qjCode> -->
+			<qjCode :receive_code="item.receive_code"></qjCode>
 		</view>
-		<view class="order-item">
-			<ordedetail></ordedetail>
-			<!-- 支付取消 -->
-			<!-- <cancelorpay></cancelorpay> -->
-			<!-- 取件码 -->
-			<qjCode></qjCode>
-		</view>
-		<view class="order-item"><ordedetail></ordedetail></view>
 	</view>
 </template>
 
@@ -55,14 +58,80 @@ export default {
 	},
 	data() {
 		return {
-			option:[]
+			tab: 1,
+			page: 1,
+			pageSize: 15,
+			list:[]
 		};
 	},
 	async onLoad(option) {
-		this.option = option
-		console.log(this.option)
+		this.tab = option.tab;
+		let that = this
+		//取消订单
+		uni.$on('cancelOrder', async function(orderlistIndex){
+			let postData = {
+				mainId:that.list[orderlistIndex].main_order_id,
+				taskId:that.list[orderlistIndex].id,
+			}
+			let ret = await that.$helper.httpPost(that.$api.cancelOrder_url_post,postData);
+			if(ret.state == 'success'){
+				that.list.splice(orderlistIndex, 1)
+				uni.showToast({
+					title:ret.msg,
+					duration:3000,
+					icon:'none'
+				})
+			}
+		})
+		uni.$on('payOrder',function(orderlistIndex){
+			uni.navigateTo({
+				url:"/pages/print/payPrint?main_id=" + that.list[orderlistIndex].main_order_id + '&task_id=' + that.list[orderlistIndex].id
+			})
+		})
 	},
-	methods: {}
+	//分页加载
+	onReachBottom() {
+		this.getOrderList()
+	},
+	computed: {
+		tab_change() {
+			return this.tab;
+		}
+	},
+	watch: {
+		tab_change(val) {
+			this.tab = val
+			this.page = 1
+			this.list = []
+			//获取对应tab的内容
+			this.getOrderList()
+		}
+	},
+	methods: {
+
+		async getOrderList(type) {
+			let query = this.$helper.objToQuery({
+				type:this.tab,
+				page: this.page,
+				pageSize: this.pageSize
+			});
+			let ret = await this.$helper.httpGet(this.$api.orderList_url_get + query);
+			if(ret.state == 'success'){
+				if(ret.data.length == 0 && this.page > 1){
+					uni.showToast({
+						title:'记录没有了',
+						duration:3000,
+						icon:'none'
+					})
+					return
+				}
+				for(let item of ret.data){
+					this.list.push(item)
+				}
+				this.page++
+			}
+		}
+	}
 };
 </script>
 
@@ -78,7 +147,7 @@ page {
 
 		view {
 			width: 25%;
-			line-height: 29upx;
+			line-height: 100%;
 			@include font-no-height(26upx, 400, $color-ff);
 			text-align: center;
 		}
