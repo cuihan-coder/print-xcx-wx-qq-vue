@@ -6,7 +6,7 @@
 		</view>
 		<view class="a4-model" :style="'height:' + A4H + 'px;' + 'width:' + A4W + 'px;'" @click="uploadPic">
 			<view class="no-file" v-if="!imgSrc">
-				<image src="http://qswy.com/static/xcximg/certificates_img@2x.png"></image>
+				<image src="https://qs.shideng-inc.com/static/xcximg/certificates_img@2x.png"></image>
 				<view>点击添加图片</view>
 			</view>
 			<image
@@ -41,35 +41,35 @@
 		</view>
 		<view class="offset-set">
 			<view class="btn-class" @click="playFun('moveUp', 'pt', -2)">
-				<image src="http://qswy.com/static/xcximg/certificates_up@2x.png"></image>
+				<image src="https://qs.shideng-inc.com/static/xcximg/certificates_up@2x.png"></image>
 				<view>上移</view>
 			</view>
 			<view class="btn-class" @click="playFun('moveUp', 'pt', 2)">
-				<image src="http://qswy.com/static/xcximg/certificates_lower@2x.png"></image>
+				<image src="https://qs.shideng-inc.com/static/xcximg/certificates_lower@2x.png"></image>
 				<view>下移</view>
 			</view>
 			<view class="btn-class" @click="playFun('moveLeft', 'pl')">
-				<image src="http://qswy.com/static/xcximg/certificates_left@2x.png"></image>
+				<image src="https://qs.shideng-inc.com/static/xcximg/certificates_left@2x.png"></image>
 				<view>左移</view>
 			</view>
 			<view class="btn-class" @click="playFun('moveMiddle', 'pl')">
-				<image src="http://qswy.com/static/xcximg/certificates_center@2x.png"></image>
+				<image src="https://qs.shideng-inc.com/static/xcximg/certificates_center@2x.png"></image>
 				<view>居中</view>
 			</view>
 			<view class="btn-class" @click="playFun('moveRight', 'pl')">
-				<image src="http://qswy.com/static/xcximg/certificates_right@2x.png"></image>
+				<image src="https://qs.shideng-inc.com/static/xcximg/certificates_right@2x.png"></image>
 				<view>右移</view>
 			</view>
 			<view class="btn-class" @click="playFun('changeSize', '', 4)">
-				<image src="http://qswy.com/static/xcximg/certificates_enlarge@2x.png"></image>
+				<image src="https://qs.shideng-inc.com/static/xcximg/certificates_enlarge@2x.png"></image>
 				<view>放大</view>
 			</view>
 			<view class="btn-class" @click="playFun('changeSize', '', -4)">
-				<image src="http://qswy.com/static/xcximg/certificates_narrow@2x.png"></image>
+				<image src="https://qs.shideng-inc.com/static/xcximg/certificates_narrow@2x.png"></image>
 				<view>缩小</view>
 			</view>
 			<view class="btn-class" @click="playFun('rotating', '', 90)">
-				<image src="http://qswy.com/static/xcximg/certificates_rotate1@2x.png"></image>
+				<image src="https://qs.shideng-inc.com/static/xcximg/certificates_rotate1@2x.png"></image>
 				<view>旋转</view>
 			</view>
 		</view>

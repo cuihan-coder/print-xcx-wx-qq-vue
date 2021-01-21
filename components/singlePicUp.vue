@@ -6,11 +6,11 @@
 		</view>
 		<view class="a4-model">
 			<view class="no-file" v-if="imgUrl == '' " @click="uploadPic()">
-				<image src="http://qswy.com/static/xcximg/certificates_img@2x.png"></image>
+				<image src="https://qs.shideng-inc.com/static/xcximg/certificates_img@2x.png"></image>
 				<view>点击添加图片</view>
 			</view>
 			<image v-if="imgUrl"  class="file-img" :src="imgUrl"></image>
-			<image v-if="imgUrl" @click="delImg()" class="trush" src="http://qswy.com/static/xcximg/certificates_del@2x.png"></image>
+			<image v-if="imgUrl" @click="delImg()" class="trush" src="https://qs.shideng-inc.com/static/xcximg/certificates_del@2x.png"></image>
 		</view>
 	</view>
 </template>

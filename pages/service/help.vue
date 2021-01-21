@@ -2,7 +2,7 @@
 	<view class="content">
 		<view class="voucher-cont" v-for="(item,index) in list" @click="toPage('/pages/service/helpInfo?info='+ encodeURIComponent(JSON.stringify(item)))">
 			<text class="title">{{item.title}}</text>
-			<image src="http://qswy.com/static/xcximg/file_more@2x.png"></image>
+			<image src="https://qs.shideng-inc.com/static/xcximg/file_more@2x.png"></image>
 		</view>
 	</view>
 </template>

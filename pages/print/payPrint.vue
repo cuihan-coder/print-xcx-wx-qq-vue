@@ -1,25 +1,25 @@
 <template>
 	<view class="content">
-		<image class="banner-image" src="http://qswy.com/static/xcximg/banner_2@2x.png"></image>
+		<image class="banner-image" src="https://qs.shideng-inc.com/static/xcximg/banner_2@2x.png"></image>
 		<view class="pay-type">
 			<text class="pay-type-title">支付方式</text>
 			<view class="pay-type-select">
 				<view class="pay-type-select-title">
-					<image src="http://qswy.com/static/xcximg/file_yply@2x.png"></image>
+					<image src="https://qs.shideng-inc.com/static/xcximg/file_yply@2x.png"></image>
 					<text>余额支付</text>
 					<text>（可用 {{balance}}元）</text>
 				</view>
-				<image v-if="default_pay != 'balance'"  @click="default_pay = 'balance'" class="pay-checked" src="http://qswy.com/static/xcximg/file_choice_n@2x.png"></image>
-				<image v-if="default_pay == 'balance'" class="pay-checked"  src="http://qswy.com/static/xcximg/currency_wancheng@2x.png"></image>
+				<image v-if="default_pay != 'balance'"  @click="default_pay = 'balance'" class="pay-checked" src="https://qs.shideng-inc.com/static/xcximg/file_choice_n@2x.png"></image>
+				<image v-if="default_pay == 'balance'" class="pay-checked"  src="https://qs.shideng-inc.com/static/xcximg/currency_wancheng@2x.png"></image>
 				
 			</view>
 			<view class="pay-type-select">
 				<view class="pay-type-select-title">
-					<image src="http://qswy.com/static/xcximg/file_wply@2x.png"></image>
+					<image src="https://qs.shideng-inc.com/static/xcximg/file_wply@2x.png"></image>
 					<text>微信支付</text>
 				</view>
-				<image v-if="default_pay != 'wxpay'"  @click="default_pay = 'wxpay'" class="pay-checked" src="http://qswy.com/static/xcximg/file_choice_n@2x.png"></image>
-				<image v-if="default_pay == 'wxpay'" class="pay-checked"  src="http://qswy.com/static/xcximg/currency_wancheng@2x.png"></image>
+				<image v-if="default_pay != 'wxpay'"  @click="default_pay = 'wxpay'" class="pay-checked" src="https://qs.shideng-inc.com/static/xcximg/file_choice_n@2x.png"></image>
+				<image v-if="default_pay == 'wxpay'" class="pay-checked"  src="https://qs.shideng-inc.com/static/xcximg/currency_wancheng@2x.png"></image>
 			</view>
 		</view>
 
@@ -27,7 +27,7 @@
 			<text class="title">优惠券</text>
 			<view class="selector">
 				<picker @change="selectVoucher" class="picker-style" mode="selector" :range="voucherList" range-key="title">{{ voucherName }}</picker>
-				<image src="http://qswy.com/static/xcximg/file_more@2x.png"></image>
+				<image src="https://qs.shideng-inc.com/static/xcximg/file_more@2x.png"></image>
 			</view>
 		</view>
 
@@ -40,11 +40,11 @@
 			<view class="row-1">
 				<text class="title">费用明细</text>
 				<view class="play-btn" @click="is_show_detail = false" v-if="is_show_detail==true">
-					<image src="http://qswy.com/static/xcximg/file_hide@2x.png"></image>
+					<image src="https://qs.shideng-inc.com/static/xcximg/file_hide@2x.png"></image>
 					<text class="shouqi">收起</text>
 				</view>
 				<view class="play-btn" @click="is_show_detail = true" v-if="is_show_detail==false">
-					<image src="http://qswy.com/static/xcximg/file_display@2x.png"></image>
+					<image src="https://qs.shideng-inc.com/static/xcximg/file_display@2x.png"></image>
 					<text class="zhankai">展开</text>
 				</view>
 			</view>
@@ -158,11 +158,9 @@ export default {
 				duration:3000
 			});
 			if(ret.state == 'success' && that.default_pay == 'balance'){
-				if(state == true){
-					uni.navigateTo({
-						url:'/pages/print/payOk'
-					})
-				}
+				uni.navigateTo({
+					url:'/pages/print/payOk'
+				})
 			}
 			if (ret.state == 'success' && that.default_pay == 'wxpay') {
 				// #ifdef MP-WEIXIN
@@ -174,9 +172,15 @@ export default {
 				}
 				// #endif
 				// #ifdef MP-QQ
-				uni.showToast({
-					title:'QQ支付功能开发中-可使用微信',
-					icon:'none'
+				qq.requestWxPayment({
+				  url:ret.data.mweb_url,
+				  referer: ret.data.referer,
+				  success(res) {
+					  uni.navigateTo({
+					  	url:'/pages/print/payOk'
+					  })
+				  },
+				  fail(res) {}
 				})
 				// #endif
 			}

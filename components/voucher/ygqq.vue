@@ -2,7 +2,7 @@
 	<view class="ygqq">
 		<view class="circle-top"></view>
 		<view class="circle-down"></view>
-		<image class="guoqi-jiao" src="http://qswy.com/static/xcximg/coupon_icon_overdue@2x.png"></image>
+		<image class="guoqi-jiao" src="https://qs.shideng-inc.com/static/xcximg/coupon_icon_overdue@2x.png"></image>
 		<view class="ygqq-left">
 			<view>{{ money }}</view>
 			<view>代金券</view>
@@ -57,7 +57,7 @@ export default {
 		align-content: center;
 		flex-shrink: 0;
 		@include w-h(30%, 100%);
-		background: url('http://qswy.com/static/xcximg/coupon_wave_dis@2x.png') no-repeat;
+		background: url('https://qs.shideng-inc.com/static/xcximg/coupon_wave_dis@2x.png') no-repeat;
 		background-size: 20upx 200upx;
 		background-position: left 0;
 		view:nth-child(1) {

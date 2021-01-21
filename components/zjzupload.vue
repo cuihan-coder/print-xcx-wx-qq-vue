@@ -6,7 +6,7 @@
 				<text>{{ printType.name }}</text>
 				<text>({{ printType.size }})</text>
 			</view>
-			<view class="case-img"><image src="http://qswy.com/static/xcximg/certificates_example @2x.png"></image></view>
+			<view class="case-img"><image src="https://qs.shideng-inc.com/static/xcximg/certificates_example @2x.png"></image></view>
 			<view class="pic-desc">
 				<view>最佳拍摄姿势</view>
 				<view class="ul-num">
@@ -28,8 +28,8 @@
 			</view>
 		</view>
 		<view class="upload-play-btn">
-			<image @click="chooseImage('camera')" src="http://qswy.com/static/xcximg/certificates_but_shot@2x.png"></image>
-			<image @click="chooseImage('album')" src="http://qswy.com/static/xcximg/certificates_but_album@2x.png"></image>
+			<image @click="chooseImage('camera')" src="https://qs.shideng-inc.com/static/xcximg/certificates_but_shot@2x.png"></image>
+			<image @click="chooseImage('album')" src="https://qs.shideng-inc.com/static/xcximg/certificates_but_album@2x.png"></image>
 		</view>
 	</view>
 </template>

@@ -3,7 +3,7 @@
 		<scanEquipment></scanEquipment>
 		<view class="mn-A4">
 			<view class="title">
-				<image src="http://qswy.com/static/xcximg/certificates_icon17@2x.png"></image>
+				<image src="https://qs.shideng-inc.com/static/xcximg/certificates_icon17@2x.png"></image>
 				<text>证件照打印</text>
 			</view>
 			<view class="a4-model-1">
@@ -25,7 +25,7 @@
 				</view>
 			</view>
 			<view class="load-more" @click="`${loadMore = selectList.length}`" v-if="loadMore ==2">
-				<image src="http://qswy.com/static/xcximg/file_display@2x.png"></image>
+				<image src="https://qs.shideng-inc.com/static/xcximg/file_display@2x.png"></image>
 				更多规格
 			</view>
 		</view>
@@ -45,112 +45,112 @@ export default {
 				{
 					name: '一寸',
 					size: '25mmx35mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon17@2x.png'
 				},
 				{
 					name: '二寸',
 					size: '35mmx49mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon17@2x.png'
 				},
 				{
 					name: '小一寸',
 					size: '22mmx32mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon17@2x.png'
 				},
 				{
 					name: '小二寸',
 					size: '35mmx45mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon17@2x.png'
 				},
 				{
 					name: '三寸',
 					size: '55mmx84mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon17@2x.png'
 				},
 				{
 					name: '五寸',
 					size: '89mmx127mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon17@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon17@2x.png'
 				},
 				{
 					name: '身份证',
 					size: '26mmx32mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon1@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon1@2x.png'
 				},
 				{
 					name: '居住证',
 					size: '22mmx32mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon2@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon2@2x.png'
 				},
 				{
 					name: '驾驶证',
 					size: '22mmx32mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon3@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon3@2x.png'
 				},
 				{
 					name: '社保',
 					size: '26mmx32mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon4@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon4@2x.png'
 				},
 				{
 					name: '中国护照',
 					size: '33mmx48mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon5@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon5@2x.png'
 				},
 				{
 					name: '台湾通行证',
 					size: '33mmx48mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon6@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon6@2x.png'
 				},
 				{
 					name: '港澳通行证',
 					size: '33mmx48mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon8@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon8@2x.png'
 				},
 				{
 					name: '入台证',
 					size: '35mmx45mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon7@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon7@2x.png'
 				},
 				{
 					name: '入境签证',
 					size: '33mmx48mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon16@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon16@2x.png'
 				},
 				{
 					name: '通用签证',
 					size: '35mmx45mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon15@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon15@2x.png'
 				},
 				{
 					name: '来华签证',
 					size: '33mmx48mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon14@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon14@2x.png'
 				},
 				{
 					name: '泰国签证',
 					size: '40mmx60mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon13@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon13@2x.png'
 				},
 				{
 					name: '日本签证',
 					size: '45mmx45mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon12@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon12@2x.png'
 				},
 				{
 					name: '美国签证',
 					size: '51mmx51mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon11@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon11@2x.png'
 				},
 				{
 					name: '印度签证',
 					size: '51mmx51mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon10@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon10@2x.png'
 				},
 				{
 					name: '阿根廷签证',
 					size: '40mmx40mm',
-					pic: 'http://qswy.com/static/xcximg/certificates_icon9@2x.png'
+					pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_icon9@2x.png'
 				}
 			],
 			//是否加载更多，默认展示下标到2 

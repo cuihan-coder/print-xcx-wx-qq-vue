@@ -5,7 +5,7 @@
 			<view class="item-padding">
 				<view class="title">{{item.title}}</view>
 				<view class="active-time">
-					<image src="http://qswy.com/static/xcximg/me_activity_time@2x.png"></image>
+					<image src="https://qs.shideng-inc.com/static/xcximg/me_activity_time@2x.png"></image>
 					至{{item.end_time}}
 				</view>
 			</view>

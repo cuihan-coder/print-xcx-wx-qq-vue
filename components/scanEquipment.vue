@@ -4,13 +4,13 @@
 			<view class="row-1-container-top">
 				<view class="item-1">
 					<view class="item-1-left">
-						<image class="item-1-left-image" src="http://qswy.com/static/xcximg/currency_printer_s@2x.png"></image>
+						<image class="item-1-left-image" src="https://qs.shideng-inc.com/static/xcximg/currency_printer_s@2x.png"></image>
 						<text>{{ device_name }}</text>
 					</view>
-					<image @click="scanCode" class="item-1-right" src="http://qswy.com/static/xcximg/file_scan_code@2x.png"></image>
+					<image @click="scanCode" class="item-1-right" src="https://qs.shideng-inc.com/static/xcximg/file_scan_code@2x.png"></image>
 				</view>
 				<view class="item-2">
-					<image class="item-2-image" src="http://qswy.com/static/xcximg/currency_add@2x.png"></image>
+					<image class="item-2-image" src="https://qs.shideng-inc.com/static/xcximg/currency_add@2x.png"></image>
 					<text>{{ group_name }}</text>
 				</view>
 				<view class="item-3">
@@ -72,6 +72,7 @@ export default {
 					that.$store.commit('SET_DEVICECODE', res.result);
 					//获取分组价格以及设备信息
 					let userInfo = await that.$helper._getCache('userInfo');
+					console.log(userInfo)
 					let query = that.$helper.objToQuery({ device_code: that.$store.state.deviceCode, group_id: userInfo.group_id });
 					let ret = await that.$helper.httpGet(that.$api.getDeviceGroupInfo_url_get + query);
 					if (ret.state == 'success') {
@@ -83,7 +84,7 @@ export default {
 						if(ret.data.token){
 							userInfo.group_id = ret.data.groupInfo.id
 							that.$helper._setCache('userInfo',userInfo);
-							that.$helper._setCache('loginToken',token);
+							that.$helper._setCache('loginToken',ret.data.token);
 						}
 						that.changeInit(that)
 					} else {

@@ -2,7 +2,7 @@
 	<view class="content">
 		<view class="topup">
 			<view class="title">账户余额</view>
-			<view class="pay-icon"><image src="http://qswy.com/static/xcximg/me_wallet@2x.png"></image></view>
+			<view class="pay-icon"><image src="https://qs.shideng-inc.com/static/xcximg/me_wallet@2x.png"></image></view>
 			<view class="balance">
 				<text>¥</text>
 				<text>{{userInfo.balance}}</text>
@@ -15,7 +15,7 @@
 					<view>{{item.title}}</view>
 				</view>
 			</view>
-			<image class="banner-image" src="http://qswy.com/static/xcximg/banner_2@2x.png"></image>
+			<image class="banner-image" src="https://qs.shideng-inc.com/static/xcximg/banner_2@2x.png"></image>
 		</view>
 		<view class="money-log-list">
 			<view class="title">消费明细</view>

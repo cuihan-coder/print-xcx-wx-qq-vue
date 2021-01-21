@@ -7,7 +7,7 @@
 				<view class="userinfo-right">
 					<view class="userinfo-name-vip">
 						{{userInfo.nickname}}
-						<image v-if="userInfo.member_type == 2" class="image" src="http://qswy.com/static/xcximg/me_vip@2x.png"></image>
+						<image v-if="userInfo.member_type == 2" class="image" src="https://qs.shideng-inc.com/static/xcximg/me_vip@2x.png"></image>
 					</view>
 <!-- 					<view v-if="userInfo.mobile" class="userinfo-phone">{{userInfo.mobile}}</view>
 					<button class="mobile-btn" v-if="userInfo.mobile == ''" open-type="getPhoneNumber" @getphonenumber="getphonenumber">同步手机号</button> -->
@@ -23,25 +23,25 @@
 					<view>订单</view>
 					<view @click="toPage('/pages/order/orderList?tab=1')">
 						全部订单
-						<image class="more-jt" src="http://qswy.com/static/xcximg/file_more@2x.png"></image>
+						<image class="more-jt" src="https://qs.shideng-inc.com/static/xcximg/file_more@2x.png"></image>
 					</view>
 				</view>
 				<view class="my-play-btn-list">
 					<navigator class="my-play-btn" open-type="navigate" url="/pages/order/orderList?tab=1">
-						<image class="btn-img" src="http://qswy.com/static/xcximg/me_order_1@2x.png"></image>
+						<image class="btn-img" src="https://qs.shideng-inc.com/static/xcximg/me_order_1@2x.png"></image>
 						<view>待支付</view>
 					</navigator>
 					<navigator class="my-play-btn" open-type="navigate" url="/pages/order/orderList?tab=2">
 						<view class="tip-num">{{waitPrintNum}}</view>
-						<image class="btn-img" src="http://qswy.com/static/xcximg/me_order_2@2x.png"></image>
+						<image class="btn-img" src="https://qs.shideng-inc.com/static/xcximg/me_order_2@2x.png"></image>
 						<view>待打印</view>
 					</navigator>
 					<navigator class="my-play-btn" open-type="navigate" url="/pages/order/orderList?tab=3">
-						<image class="btn-img" src="http://qswy.com/static/xcximg/me_order_3@2x.png"></image>
+						<image class="btn-img" src="https://qs.shideng-inc.com/static/xcximg/me_order_3@2x.png"></image>
 						<view>已打印</view>
 					</navigator>
 					<navigator class="my-play-btn" open-type="navigate" url="/pages/order/orderList?tab=4">
-						<image class="btn-img" src="http://qswy.com/static/xcximg/me_order_4@2x.png"></image>
+						<image class="btn-img" src="https://qs.shideng-inc.com/static/xcximg/me_order_4@2x.png"></image>
 						<view>售后</view>
 					</navigator>
 				</view>
@@ -49,47 +49,47 @@
 			<view class="active-list">
 				<view class="active-item border-bottom-line"  @click="toPage('/pages/userModule/topup')">
 					<view class="active-item-left">
-						<image class="active-icon" src="http://qswy.com/static/xcximg/me_menu_1@2x.png"></image>
+						<image class="active-icon" src="https://qs.shideng-inc.com/static/xcximg/me_menu_1@2x.png"></image>
 						<view>我的钱包</view>
 					</view>
-					<image class="more-jt" src="http://qswy.com/static/xcximg/file_more@2x.png"></image>
+					<image class="more-jt" src="https://qs.shideng-inc.com/static/xcximg/file_more@2x.png"></image>
 				</view>
 				<view class="active-item border-bottom-line" @click="toPage('/pages/userModule/voucher')">
 					<view class="active-item-left">
-						<image class="active-icon" src="http://qswy.com/static/xcximg/conpon@2x.png"></image>
+						<image class="active-icon" src="https://qs.shideng-inc.com/static/xcximg/conpon@2x.png"></image>
 						<view>优惠券</view>
 					</view>
-					<image class="more-jt" src="http://qswy.com/static/xcximg/file_more@2x.png"></image>
+					<image class="more-jt" src="https://qs.shideng-inc.com/static/xcximg/file_more@2x.png"></image>
 				</view>
 				<view class="active-item border-bottom-line" @click="toPage('/pages/userModule/shareFriend')">
 					<view class="active-item-left">
-						<image class="active-icon" src="http://qswy.com/static/xcximg/me_menu_3@2x.png"></image>
+						<image class="active-icon" src="https://qs.shideng-inc.com/static/xcximg/me_menu_3@2x.png"></image>
 						<view>分享有礼</view>
 					</view>
-					<image class="more-jt" src="http://qswy.com/static/xcximg/file_more@2x.png"></image>
+					<image class="more-jt" src="https://qs.shideng-inc.com/static/xcximg/file_more@2x.png"></image>
 				</view>
 				<view class="active-item" @click="toPage('/pages/index/activeList')">
 					<view class="active-item-left">
-						<image class="active-icon" src="http://qswy.com/static/xcximg/me_menu_4@2x.png"></image>
+						<image class="active-icon" src="https://qs.shideng-inc.com/static/xcximg/me_menu_4@2x.png"></image>
 						<view>活动中心</view>
 					</view>
-					<image class="more-jt" src="http://qswy.com/static/xcximg/file_more@2x.png"></image>
+					<image class="more-jt" src="https://qs.shideng-inc.com/static/xcximg/file_more@2x.png"></image>
 				</view>
 			</view>
 			<view class="active-list margin-bootom-height">
 				<view class="active-item border-bottom-line" @click="toPage('/pages/service/help')">
 					<view class="active-item-left">
-						<image class="active-icon" src="http://qswy.com/static/xcximg/me_menu_5@2x.png"></image>
+						<image class="active-icon" src="https://qs.shideng-inc.com/static/xcximg/me_menu_5@2x.png"></image>
 						<view>使用帮助</view>
 					</view>
-					<image class="more-jt" src="http://qswy.com/static/xcximg/file_more@2x.png"></image>
+					<image class="more-jt" src="https://qs.shideng-inc.com/static/xcximg/file_more@2x.png"></image>
 				</view>
 				<view class="active-item"  @click="toPage('/pages/service/contact')">
 					<view class="active-item-left">
-						<image class="active-icon" src="http://qswy.com/static/xcximg/me_menu_6@2x.png"></image>
+						<image class="active-icon" src="https://qs.shideng-inc.com/static/xcximg/me_menu_6@2x.png"></image>
 						<view>联系我们</view>
 					</view>
-					<image class="more-jt" src="http://qswy.com/static/xcximg/file_more@2x.png"></image>
+					<image class="more-jt" src="https://qs.shideng-inc.com/static/xcximg/file_more@2x.png"></image>
 				</view>
 			</view>
 			<view class="pad-height"></view>
@@ -170,7 +170,7 @@ page {
 		left: 0;
 		width: 750upx;
 		height: 395upx;
-		background: url('http://qswy.com/static/xcximg/a.png') no-repeat;
+		background: url('https://qs.shideng-inc.com/static/xcximg/a.png') no-repeat;
 		background-size: contain;
 		& .title {
 			margin-top: var(--status-bar-height);

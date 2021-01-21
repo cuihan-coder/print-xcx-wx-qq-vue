@@ -3,13 +3,13 @@
 		<scanEquipment></scanEquipment>
 		<view class="mn-A4">
 			<view class="title">
-				<image src="http://qswy.com/static/xcximg/certificates_s_1@2x(1).png"></image>
+				<image src="https://qs.shideng-inc.com/static/xcximg/certificates_s_1@2x(1).png"></image>
 				<text>多图片一次性打印</text>
 				<text>（单次最多9张）</text>
 			</view>
 			<view class="a4-model">
 				<view class="file-img" v-for="(item, index) in imgSrcs" :key="index">
-					<image @click="imgSrcs.splice(index, 1)" class="cha" src="http://qswy.com/static/xcximg/certificates_del_s@2x.png"></image>
+					<image @click="imgSrcs.splice(index, 1)" class="cha" src="https://qs.shideng-inc.com/static/xcximg/certificates_del_s@2x.png"></image>
 					<image class="img" :src="item"></image>
 				</view>
 				<view v-if="imgSrcs.length <= 9" @click="uploadPic()" class="add-file-img">

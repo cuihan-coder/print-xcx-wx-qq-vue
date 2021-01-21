@@ -3,26 +3,26 @@
 		<scanEquipment></scanEquipment>
 		<view class="mn-A4">
 			<view class="title">
-				<image src="http://qswy.com/static/xcximg/certificates_s_6@2x.png"></image>
+				<image src="https://qs.shideng-inc.com/static/xcximg/certificates_s_6@2x.png"></image>
 				<text>身份证图片打印</text>
 			</view>
 			<!-- 人脸面 -->
 			<view class="a4-model">
 				<view class="no-file" v-if=" zmImg == '' " @click="uploadPic('zmImg')">
-					<image src="http://qswy.com/static/xcximg/id_zheng@2x.png"></image>
+					<image src="https://qs.shideng-inc.com/static/xcximg/id_zheng@2x.png"></image>
 					<view>点击添加图片</view>
 				</view>
 			<image v-if="zmImg"  class="file-img" :src="zmImg"></image>
-			<image @click="zmImg = '' " v-if="zmImg"  class="trush" src="http://qswy.com/static/xcximg/certificates_del@2x.png"></image>
+			<image @click="zmImg = '' " v-if="zmImg"  class="trush" src="https://qs.shideng-inc.com/static/xcximg/certificates_del@2x.png"></image>
 			</view>
 			<!-- 国徽面 -->
 			<view class="a4-model">
 				<view class="no-file" v-if=" fmImg == '' " @click="uploadPic('fmImg')">
-					<image src="http://qswy.com/static/xcximg/id_fan@2x.png"></image>
+					<image src="https://qs.shideng-inc.com/static/xcximg/id_fan@2x.png"></image>
 					<view>点击添加图片</view>
 				</view>
 				<image v-if="fmImg"  class="file-img" :src="fmImg"></image>
-				<image @click="fmImg = '' " v-if="fmImg"  class="trush" src="http://qswy.com/static/xcximg/certificates_del@2x.png"></image>
+				<image @click="fmImg = '' " v-if="fmImg"  class="trush" src="https://qs.shideng-inc.com/static/xcximg/certificates_del@2x.png"></image>
 			</view>
 		</view>
 		<printParam :showParam="showParam"></printParam>

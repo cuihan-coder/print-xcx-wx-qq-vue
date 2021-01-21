@@ -114,15 +114,15 @@ export default {
 			}
 		}
 		& .blue{
-			background: url('http://qswy.com/static/xcximg/certificates_bgcolor_bule@2x.png') no-repeat;
+			background: url('https://qs.shideng-inc.com/static/xcximg/certificates_bgcolor_bule@2x.png') no-repeat;
 			background-size: contain;
 		}
 		& .red{
-			background: url('http://qswy.com/static/xcximg/certificates_bgcolor_red@2x.png') no-repeat;
+			background: url('https://qs.shideng-inc.com/static/xcximg/certificates_bgcolor_red@2x.png') no-repeat;
 			background-size: contain;
 		}
 		& .white{
-			background: url('http://qswy.com/static/xcximg/certificates_bgcolor_white@2x.png') no-repeat;
+			background: url('https://qs.shideng-inc.com/static/xcximg/certificates_bgcolor_white@2x.png') no-repeat;
 			background-size: contain;
 		}
 	}

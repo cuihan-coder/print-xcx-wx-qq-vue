@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<view class="pay-ok">
-			<image src="http://qswy.com/static/xcximg/currency_wancheng@2x.png"></image>
+			<image src="https://qs.shideng-inc.com/static/xcximg/currency_wancheng@2x.png"></image>
 			<view>支付完成</view>
 		</view>
 	</view>

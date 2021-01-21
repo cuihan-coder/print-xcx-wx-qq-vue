@@ -10,21 +10,21 @@
 		<scroll-view class="scroll-view" scroll-y="true" show-scrollbar="false">
 			<scanEquipment></scanEquipment>
 			<view class="item-entry" @click="toPage('/pages/order/suborder')">
-				<image src="http://qswy.com/static/xcximg/home_file@2x.png"></image>
+				<image src="https://qs.shideng-inc.com/static/xcximg/home_file@2x.png"></image>
 				<view class="item-entry-font" >
 					<view>文件打印</view>
 					<view>微信文档，支持PDF/DOC/XLS/PPT</view>
 				</view>
 			</view>
 			<view class="item-entry" @click="toPage('/pages/print/zjzPicPrint')">
-				<image src="http://qswy.com/static/xcximg/home_certificates@2x.png"></image>
+				<image src="https://qs.shideng-inc.com/static/xcximg/home_certificates@2x.png"></image>
 				<view class="item-entry-font">
 					<view>证件照</view>
 					<view>智能修图 美颜 排版 换红白蓝底</view>
 				</view>
 			</view>
 			<view class="item-entry" @click="`${$store.commit('home/SET_PRINTDIALOGSHOW', true)}`">
-				<image src="http://qswy.com/static/xcximg/home_img@2x.png"></image>
+				<image src="https://qs.shideng-inc.com/static/xcximg/home_img@2x.png"></image>
 				<view class="item-entry-font">
 					<view>图片打印</view>
 					<view>打印至6寸相纸或A4普通纸张</view>
@@ -88,6 +88,8 @@ export default {
 		let pid = option.pid ? option.pid : 0
 		let group_id = option.group_id ? option.group_id : 0
 		let platform = this.$store.state.platform
+		//存储全局登录信息
+		this.$helper._setCache('loginPostData',{code,pid,platform,group_id})
 		let ret = await this.$login.login({code,pid,platform,group_id})
 		let userInfo = await this.$helper._getCache('userInfo')
 		this.voucherList = await this.$helper._getCache('voucherList')
@@ -146,7 +148,7 @@ page {
 		}
 	}
 	& .scroll-view {
-		overflow: scroll;
+		overflow-y: scroll;
 		position: fixed;
 		top: 468upx;
 		bottom: 100upx;
@@ -155,6 +157,12 @@ page {
 		padding: 40upx;
 		background: $color-F8;
 		border-radius: 40upx 40upx 0px 0px;
+	}
+	& .scroll-view ::-webkit-scrollbar {
+	  display:none;
+	  width:0;
+	  height:0;
+	  color:transparent;
 	}
 	& .pad-height {
 		@include w-h(100%, 20upx);

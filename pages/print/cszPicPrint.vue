@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<scanEquipment></scanEquipment>
-		<singlePicUp :titleParam="{ name: '出生证打印', pic: 'http://qswy.com/static/xcximg/certificates_s_9@2x.png' }"></singlePicUp>
+		<singlePicUp :titleParam="{ name: '出生证打印', pic: 'https://qs.shideng-inc.com/static/xcximg/certificates_s_9@2x.png' }"></singlePicUp>
 		<printParam :showParam="showParam"></printParam>
 		<footerCount :pageNums="pageNums" :orderPrice="orderMoney"></footerCount>
 	</view>

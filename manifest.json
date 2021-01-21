@@ -59,14 +59,12 @@
     "mp-weixin" : {
         "appid" : "wxb34f19a1f5a8f547",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : false,
+            "postcss" : true,
+            "minified" : true
         },
         "usingComponents" : true,
-        "permission" : {
-            "scope.userLocation" : {
-                "desc" : ""
-            }
-        }
+        "permission" : {}
     },
     "mp-alipay" : {
         "usingComponents" : true
@@ -83,8 +81,8 @@
     "mp-qq" : {
         "appid" : "1110849481",
         "setting" : {
-            "urlCheck" : false,
-            "postcss" : true,
+            "urlCheck" : true,
+            "postcss" : false,
             "minified" : true
         }
     }

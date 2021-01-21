@@ -1,7 +1,9 @@
 
 let host = {
-	pro: 'http://qswy.com',
-	local: 'http://qswy.com'
+	pro: 'https://qs.shideng-inc.com',
+	local: 'https://qs.shideng-inc.com'
+	// pro: 'http://qswy.com',
+	// local: 'http://qswy.com'
 }
 let development = 'pro'
 

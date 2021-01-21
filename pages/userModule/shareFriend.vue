@@ -1,9 +1,9 @@
 <template>
 	<view class="content">
-		<image class="top-guize" src="http://qswy.com/static/xcximg/invitation_rule@2x.png"></image>
+		<image class="top-guize" src="https://qs.shideng-inc.com/static/xcximg/invitation_rule@2x.png"></image>
 		<view class="container">
 			<view class="dalibao">
-				<image class="title-img" src="http://qswy.com/static/xcximg/invitation_but_1@2x.png"></image>
+				<image class="title-img" src="https://qs.shideng-inc.com/static/xcximg/invitation_but_1@2x.png"></image>
 				<view class="voucher-list">
 					<view class="voucher-info" v-for="(item, index) in voucherList" :key="index">
 						<view>{{ item.title }}</view>
@@ -26,7 +26,7 @@
 				<view class="share-int">优惠券自动发送至您的账户中</view>
 				<button open-type="share"  class="ljyq-btn">立即邀请</button>
 			</view>
-			<image class="haoyou-img" src="http://qswy.com/static/xcximg/invitation_but_2@2x.png"></image>
+			<image class="haoyou-img" src="https://qs.shideng-inc.com/static/xcximg/invitation_but_2@2x.png"></image>
 			<scroll-view scroll-y="true" class="yaoqinglist">
 				<view class="table-head">
 					<text>昵称</text>
@@ -102,7 +102,7 @@ export default {
 .content {
 	width: 100%;
 	min-height: 2000upx;
-	background: url('http://qswy.com/static/xcximg/invitation_bg@2x.png') no-repeat;
+	background: url('https://qs.shideng-inc.com/static/xcximg/invitation_bg@2x.png') no-repeat;
 	background-size: cover;
 	padding-bottom: 100upx;
 	& .top-guize {
@@ -116,7 +116,7 @@ export default {
 		& .dalibao {
 			min-height: 600upx;
 			padding-bottom: 54upx;
-			background: url('http://qswy.com/static/xcximg/invitation_reward_bg@2x.png') no-repeat;
+			background: url('https://qs.shideng-inc.com/static/xcximg/invitation_reward_bg@2x.png') no-repeat;
 			background-size: 100% 100%;
 			& .title-img {
 				position: absolute;
@@ -131,7 +131,7 @@ export default {
 				& .voucher-info {
 					padding-bottom: 20upx;
 					@include w-h(32%, 212upx);
-					background: url('http://qswy.com/static/xcximg/invitation_coupon_bg@2x.png') no-repeat;
+					background: url('https://qs.shideng-inc.com/static/xcximg/invitation_coupon_bg@2x.png') no-repeat;
 					background-size: cover;
 					view:nth-child(1) {
 						padding-top: 30upx;
@@ -186,7 +186,7 @@ export default {
 			min-height: 227upx;
 			margin-top: 120upx;
 			padding-bottom: 54upx;
-			background: url('http://qswy.com/static/xcximg/invitation_people_bg@2x.png') no-repeat;
+			background: url('https://qs.shideng-inc.com/static/xcximg/invitation_people_bg@2x.png') no-repeat;
 			background-size: 100% 100%;
 			max-height: 360upx;
 			overflow-y: scroll;

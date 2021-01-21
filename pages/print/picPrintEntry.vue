@@ -3,63 +3,63 @@
 		<scanEquipment></scanEquipment>
 		<view class="pad-height"></view>
 		<view class="entry-btn"  @click="toPage('/pages/print/selfPrint')">
-			<image src="http://qswy.com/static/xcximg/certificates_s_5@2x.png"></image>
+			<image src="https://qs.shideng-inc.com/static/xcximg/certificates_s_5@2x.png"></image>
 			<view class="cont-info">
 				<view>图片打印</view>
 				<text>手机图片快速打印，可自定义打印至 A4纸的尺寸/位置</text>
 			</view>
 		</view>
 		<view class="entry-btn" @click="toPage('/pages/print/dtpPicPrint')">
-			<image src="http://qswy.com/static/xcximg/certificates_s_1@2x(1).png"></image>
+			<image src="https://qs.shideng-inc.com/static/xcximg/certificates_s_1@2x(1).png"></image>
 			<view class="cont-info">
 				<view>多图一次性打印</view>
 				<text>图片按最大尺寸打印到A4纸，可一次 多选9张</text>
 			</view>
 		</view>
 		<view class="entry-btn" @click="toPage('/pages/print/ehyPicPrint')">
-			<image src="http://qswy.com/static/xcximg/certificates_s_6@2x.png"></image>
+			<image src="https://qs.shideng-inc.com/static/xcximg/certificates_s_6@2x.png"></image>
 			<view class="cont-info">
 				<view>二合一打印</view>
 				<text>两张图片平均分布，打印至一张A4纸 上面</text>
 			</view>
 		</view>
 		<view class="entry-btn"  @click="toPage('/pages/print/sfzPicPrint')">
-			<image src="http://qswy.com/static/xcximg/certificates_s_3@2x.png"></image>
+			<image src="https://qs.shideng-inc.com/static/xcximg/certificates_s_3@2x.png"></image>
 			<view class="cont-info">
 				<view>身份证打印</view>
 				<text>身份证正反面打印至一张A4纸上</text>
 			</view>
 		</view>
 		<view class="entry-btn" @click="toPage('/pages/print/hkbPicPrint')">
-			<image src="http://qswy.com/static/xcximg/certificates_s_8@2x.png"></image>
+			<image src="https://qs.shideng-inc.com/static/xcximg/certificates_s_8@2x.png"></image>
 			<view class="cont-info">
 				<view>户口本打印</view>
 				<text>打印至A4纸上</text>
 			</view>
 		</view>
 		<view class="entry-btn"  @click="toPage('/pages/print/cszPicPrint')">
-			<image src="http://qswy.com/static/xcximg/certificates_s_9@2x.png"></image>
+			<image src="https://qs.shideng-inc.com/static/xcximg/certificates_s_9@2x.png"></image>
 			<view class="cont-info">
 				<view>出生证打印</view>
 				<text>打印至A4纸上</text>
 			</view>
 		</view>
 		<view class="entry-btn" @click="toPage('/pages/print/jhzPicPrint')">
-			<image src="http://qswy.com/static/xcximg/certificates_s_10@2x.png"></image>
+			<image src="https://qs.shideng-inc.com/static/xcximg/certificates_s_10@2x.png"></image>
 			<view class="cont-info">
 				<view>结婚证打印</view>
 				<text>打印至A4纸上</text>
 			</view>
 		</view>
 		<view class="entry-btn" @click="toPage('/pages/print/fczPicPrint')">
-			<image src="http://qswy.com/static/xcximg/certificates_s_11@2x.png"></image>
+			<image src="https://qs.shideng-inc.com/static/xcximg/certificates_s_11@2x.png"></image>
 			<view class="cont-info">
 				<view>房产证打印</view>
 				<text>打印至A4纸上</text>
 			</view>
 		</view>
 		<view class="entry-btn" @click="toPage('/pages/print/byzPicPrint')">
-			<image src="http://qswy.com/static/xcximg/certificates_s_12@2x.png"></image>
+			<image src="https://qs.shideng-inc.com/static/xcximg/certificates_s_12@2x.png"></image>
 			<view class="cont-info">
 				<view>毕业证打印</view>
 				<text>打印至A4纸上</text>

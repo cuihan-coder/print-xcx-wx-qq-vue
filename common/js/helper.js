@@ -1,3 +1,4 @@
+import loginModel from "./login.js"
 const helper = {
 	async _setCache(_key,_data){
 		return uni.setStorageSync(_key, _data);

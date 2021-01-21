@@ -1,15 +1,15 @@
 <template>
 	<view class="footer-menu">
 		<view class="menu-icon" @click="toPage('/pages/index/home')">
-			<image src="http://qswy.com/static/xcximg/home_home_s@2x.png"></image>
+			<image src="https://qs.shideng-inc.com/static/xcximg/home_home_s@2x.png"></image>
 			<view>首页</view>
 		</view>
 		<view class="menu-center" @click="scanCode">
-			<image src="http://qswy.com/static/xcximg/home_saoyisao@2x.png"></image>
+			<image src="https://qs.shideng-inc.com/static/xcximg/home_saoyisao@2x.png"></image>
 			<view>扫码打印</view>
 		</view>
 		<view class="menu-icon" @click="toPage('/pages/userModule/userInfo')">
-			<image src="http://qswy.com/static/xcximg/home_me_n@2x.png"></image>
+			<image src="https://qs.shideng-inc.com/static/xcximg/home_me_n@2x.png"></image>
 			<view>我的</view>
 		</view>
 	</view>
@@ -43,10 +43,9 @@ export default {
 						that.$store.commit('SET_CZPRICE', ret.data.czPrice);
 						//组ID与设备对应组ID不一致，则进行绑定设备对于的组ID，并且更新用户的组ID
 						if (ret.data.token) {
-							userInfo.group_id = ret.data.groupInfo.id;
-							that.$helper._setCache('userInfo', ret.data.userInfo);
-							console.log(ret.data.token)
-							that.$helper._setCache('loginToken', ret.data.token);
+							userInfo.group_id = ret.data.groupInfo.id
+							that.$helper._setCache('userInfo',userInfo);
+							that.$helper._setCache('loginToken',ret.data.token);
 						}
 					} else {
 						uni.showToast({

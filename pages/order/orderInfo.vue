@@ -4,15 +4,15 @@
 			<view class="print-name">
 				<view class="print-name-1">
 					<!-- pptx -->
-					<image v-if="info.file_ext == 'pptx' || info.file_ext == 'ppt'" class="img-icon" src="http://qswy.com/static/xcximg/file_ppt@2x.png"></image>
+					<image v-if="info.file_ext == 'pptx' || info.file_ext == 'ppt'" class="img-icon" src="https://qs.shideng-inc.com/static/xcximg/file_ppt@2x.png"></image>
 					<!-- xlsx -->
-					<image v-if="info.file_ext == 'xlsx' || info.file_ext == 'xls'" class="img-icon" src="http://qswy.com/static/xcximg/file_exl@2x.png"></image>
+					<image v-if="info.file_ext == 'xlsx' || info.file_ext == 'xls'" class="img-icon" src="https://qs.shideng-inc.com/static/xcximg/file_exl@2x.png"></image>
 					<!-- doc -->
-					<image v-if="info.file_ext == 'doc' || info.file_ext == 'docx'" class="img-icon" src="http://qswy.com/static/xcximg/file_word@2x.png"></image>
+					<image v-if="info.file_ext == 'doc' || info.file_ext == 'docx'" class="img-icon" src="https://qs.shideng-inc.com/static/xcximg/file_word@2x.png"></image>
 					<!-- pdf -->
-					<image v-if="info.file_ext == 'pdf'" class="img-icon" src="http://qswy.com/static/xcximg/file_pdf@2x.png"></image>
+					<image v-if="info.file_ext == 'pdf'" class="img-icon" src="https://qs.shideng-inc.com/static/xcximg/file_pdf@2x.png"></image>
 					<!-- 图片打印 -->
-					<image v-if="~['png','jpg','jpeg'].indexOf(info.file_ext) != 0" class="img-icon" src="http://qswy.com/static/xcximg/certificates_s_5@2x.png"></image>
+					<image v-if="~['png','jpg','jpeg'].indexOf(info.file_ext) != 0" class="img-icon" src="https://qs.shideng-inc.com/static/xcximg/certificates_s_5@2x.png"></image>
 					{{info.file_name}}
 				</view>
 				<!-- <text class="ydy">已打印</text> -->

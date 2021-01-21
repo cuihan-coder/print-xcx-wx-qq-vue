@@ -8,30 +8,30 @@
 					@click="changeFilter(index, 'is_checked', false)"
 					v-if="item.is_checked == true"
 					class="check-cricle"
-					src="http://qswy.com/static/xcximg/currency_wancheng@2x.png"
+					src="https://qs.shideng-inc.com/static/xcximg/currency_wancheng@2x.png"
 				></image>
 				<image
 					@click="changeFilter(index, 'is_checked', true)"
 					v-if="item.is_checked == false"
 					class="check-cricle"
-					src="http://qswy.com/static/xcximg/file_choice_n@2x.png"
+					src="https://qs.shideng-inc.com/static/xcximg/file_choice_n@2x.png"
 				></image>
 				<view class="row-1-right">
 					<view class="row-1-right-item1">
 						<view class="row-1-right-item1-left">
 							<!-- pptx -->
-							<image v-if="item.file_ext == 'pptx' || item.file_ext == 'ppt'" class="img-icon" src="http://qswy.com/static/xcximg/file_ppt@2x.png"></image>
+							<image v-if="item.file_ext == 'pptx' || item.file_ext == 'ppt'" class="img-icon" src="https://qs.shideng-inc.com/static/xcximg/file_ppt@2x.png"></image>
 							<!-- xlsx -->
-							<image v-if="item.file_ext == 'xlsx' || item.file_ext == 'xls'" class="img-icon" src="http://qswy.com/static/xcximg/file_exl@2x.png"></image>
+							<image v-if="item.file_ext == 'xlsx' || item.file_ext == 'xls'" class="img-icon" src="https://qs.shideng-inc.com/static/xcximg/file_exl@2x.png"></image>
 							<!-- doc -->
-							<image v-if="item.file_ext == 'doc' || item.file_ext == 'docx'" class="img-icon" src="http://qswy.com/static/xcximg/file_word@2x.png"></image>
+							<image v-if="item.file_ext == 'doc' || item.file_ext == 'docx'" class="img-icon" src="https://qs.shideng-inc.com/static/xcximg/file_word@2x.png"></image>
 							<!-- pdf -->
-							<image v-if="item.file_ext == 'pdf'" class="img-icon" src="http://qswy.com/static/xcximg/file_pdf@2x.png"></image>
+							<image v-if="item.file_ext == 'pdf'" class="img-icon" src="https://qs.shideng-inc.com/static/xcximg/file_pdf@2x.png"></image>
 
 							<text>{{ item.file_name }}</text>
 						</view>
 						<view class="row-1-right-item1-right" @click="openDoc(index)">
-							<image class="img-icon" src="http://qswy.com/static/xcximg/file_preview@2x.png"></image>
+							<image class="img-icon" src="https://qs.shideng-inc.com/static/xcximg/file_preview@2x.png"></image>
 							<text>预览</text>
 						</view>
 					</view>
@@ -82,20 +82,20 @@
 				</view>
 			</view>
 			<view class="show-btn">
-				<image @click="deleteFile(index)" class="trush" src="http://qswy.com/static/xcximg/file_dle@2x.png"></image>
+				<image @click="deleteFile(index)" class="trush" src="https://qs.shideng-inc.com/static/xcximg/file_dle@2x.png"></image>
 				<view class="hide" v-if="item.is_open == true" @click="taskList[index].is_open = false">
-					<image class="jt" src="http://qswy.com/static/xcximg/file_hide@2x.png"></image>
+					<image class="jt" src="https://qs.shideng-inc.com/static/xcximg/file_hide@2x.png"></image>
 					收起
 				</view>
 				<view class="show" v-if="item.is_open == false" @click="taskList[index].is_open = true">
-					<image class="jt" src="http://qswy.com/static/xcximg/file_display@2x.png"></image>
+					<image class="jt" src="https://qs.shideng-inc.com/static/xcximg/file_display@2x.png"></image>
 					展开
 				</view>
 			</view>
 		</view>
 
 		<!-- 悬浮图标 -->
-		<image @click="uploadFile" class="xuanfu-img" src="http://qswy.com/static/xcximg/file_choice@2x.png"></image>
+		<image @click="uploadFile" class="xuanfu-img" src="https://qs.shideng-inc.com/static/xcximg/file_choice@2x.png"></image>
 		<footerCount :pageNums="pageNums" :orderPrice="orderMoney"></footerCount>
 	</view>
 </template>
@@ -237,7 +237,7 @@ export default {
 			let taskId = []
 			for (let item of this.taskList) {
 				if (item.is_checked == true) {
-					this.orderMoney += item.price;
+					this.orderMoney += parseFloat(item.price) ;
 					this.pageNums += (item.end_page - item.start_page + 1) * item.printNum;
 					taskId.push(item.id)
 				}
@@ -343,17 +343,20 @@ page {
 				flex-shrink: 0;
 			}
 			& .row-1-right {
-				width: 100%;
+				width:90%;
 				margin-left: 20upx;
 				& .row-1-right-item1 {
 					width: 100%;
 					@include display-flex-space-between;
 					& .row-1-right-item1-left {
 						@include display-flex-start;
-						max-width: 100%;
-						overflow: hidden;
-						white-space: nowrap;
-						text-overflow: ellipsis;
+						max-width: 82%;
+						& text{
+							display: block;
+							overflow: hidden;
+							white-space: nowrap;
+							text-overflow: ellipsis;
+						}
 						& .img-icon {
 							@include w-h(54upx, 54upx);
 							flex-shrink: 0;
@@ -538,7 +541,7 @@ page {
 		position: fixed;
 		right: 40upx;
 		bottom: 238upx;
-		@include w-h(94upx, 94upx);
+		@include w-h(120upx, 120upx);
 	}
 
 	& .height-pad {

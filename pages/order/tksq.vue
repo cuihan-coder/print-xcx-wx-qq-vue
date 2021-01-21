@@ -4,7 +4,7 @@
 			<text class="title">理由</text>
 			<view class="selector">
 				<picker class="picker-style" mode="selector" @change="selectVoucher" :range="typeList" range-key="name">{{ typeName }}</picker>
-				<image src="http://qswy.com/static/xcximg/file_more@2x.png"></image>
+				<image src="https://qs.shideng-inc.com/static/xcximg/file_more@2x.png"></image>
 			</view>
 		</view>
 		<view class="leave-msg">
@@ -13,7 +13,7 @@
 			<view class="uplaod-img">
 				<view class="img-cont" v-for="(item,index) in imgUrl" :key="index">
 					<!-- 叉 -->
-					<image src="http://qswy.com/static/xcximg/certificates_del_s@2x.png"></image>
+					<image src="https://qs.shideng-inc.com/static/xcximg/certificates_del_s@2x.png"></image>
 					<!-- 上传图片 -->
 					<image :src="item"></image>
 				</view>

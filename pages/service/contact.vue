@@ -4,7 +4,7 @@
 			<text class="title">咨询问题</text>
 			<view class="selector">
 				<picker @change="changes()" class="picker-style" mode="selector" :range="typeList" range-key="name">{{ typeName }}</picker>
-				<image src="http://qswy.com/static/xcximg/file_more@2x.png"></image>
+				<image src="https://qs.shideng-inc.com/static/xcximg/file_more@2x.png"></image>
 			</view>
 		</view>
 		<view class="leave-msg">

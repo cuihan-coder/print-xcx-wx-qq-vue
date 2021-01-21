@@ -18,7 +18,7 @@
 				可查看
 			</view>
 			<view class="close-btn" @click="`${$store.commit('home/SET_VOUCHERDIALOGSHOW', false)}`">
-				<image  src="http://qswy.com/static/xcximg/coupon_new_gb@2x.png"></image>
+				<image  src="https://qs.shideng-inc.com/static/xcximg/coupon_new_gb@2x.png"></image>
 			</view>
 		</view>
 		
@@ -71,7 +71,7 @@ export default {
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: url('http://qswy.com/static/xcximg/coupon_new_bg@2x.png') no-repeat;
+		background: url('https://qs.shideng-inc.com/static/xcximg/coupon_new_bg@2x.png') no-repeat;
 		background-size: 120%;
 		background-position-x: 50%;
 		z-index: 12;

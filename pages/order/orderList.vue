@@ -160,19 +160,19 @@ page {
 		}
 	}
 	& .daizhifu {
-		background: url('http://qswy.com/static/xcximg/me_dingdan_tab1@2x.png');
+		background: url('https://qs.shideng-inc.com/static/xcximg/me_dingdan_tab1@2x.png');
 		background-size: 100%;
 	}
 	& .daiday {
-		background: url('http://qswy.com/static/xcximg/me_dingdan_tab2@2x.png');
+		background: url('https://qs.shideng-inc.com/static/xcximg/me_dingdan_tab2@2x.png');
 		background-size: 100%;
 	}
 	& .yiday {
-		background: url('http://qswy.com/static/xcximg/me_dingdan_tab3@2x.png');
+		background: url('https://qs.shideng-inc.com/static/xcximg/me_dingdan_tab3@2x.png');
 		background-size: 100%;
 	}
 	& .shouhou {
-		background: url('http://qswy.com/static/xcximg/me_dingdan_tab4@2x.png');
+		background: url('https://qs.shideng-inc.com/static/xcximg/me_dingdan_tab4@2x.png');
 		background-size: 100%;
 	}
 	& .order-item {
