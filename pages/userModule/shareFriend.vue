@@ -60,36 +60,23 @@ export default {
 			friendList: []
 		};
 	},
-	async onLoad() {
-		let ret = await this.$helper.httpGet(this.$api.shareInfo_url_get);
+	async onLoad(option) {
+		this.$store.commit('SET_PLATFORM',await this.$helper.getPlatform())
+		let code = await this.$login.getCode()
+		let pid = option.pid ? option.pid : 0
+		let group_id = option.group_id ? option.group_id : 0
+		let platform = this.$store.state.platform
+		//存储全局登录信息
+		this.$helper._setCache('loginPostData',{code,pid,platform,group_id})
+		let ret = await this.$login.login({code,pid,platform,group_id})
+		
+		ret = await this.$helper.httpGet(this.$api.shareInfo_url_get);
 		if (ret.state == 'success') {
 			this.voucherList = ret.data.voucherList;
 			this.friendList = ret.data.friendList;
 		}
 	},
 	 onShareAppMessage(){
-		let that = this
-		uni.getProvider({
-			service: 'oauth',
-			success:async function(res) {
-				let userInfo = await that.$helper._getCache('userInfo');
-				let plateform = ~res.provider.indexOf('qq') ? 'qq' : 'weixin'
-				if(plateform == 'qq'){
-					uni.showShareMenu({
-						title: '下次打印可以来这里哦！超方便实惠！',
-						query: `pid=${userInfo.id}&group_id=${userInfo.group_id}`
-					});
-				}
-				if(plateform == 'weixin'){
-					let path = `/pages/index/home?pid=${userInfo.id}&group_id=${userInfo.group_id}`;
-					uni.showShareMenu({
-						title: '下次打印可以来这里哦！超方便实惠！',
-						path: path
-					});
-				}
-			}
-		});
-		
 		
 	},
 	methods: {

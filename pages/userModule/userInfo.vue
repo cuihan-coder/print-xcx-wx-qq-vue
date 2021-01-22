@@ -61,7 +61,7 @@
 					</view>
 					<image class="more-jt" src="https://qs.shideng-inc.com/static/xcximg/file_more@2x.png"></image>
 				</view>
-				<view class="active-item border-bottom-line" @click="toPage('/pages/userModule/shareFriend')">
+				<view class="active-item border-bottom-line" @click="toPage('/pages/userModule/shareFriend?pid='+ userInfo.id + '&group_id='+userInfo.group_id)">
 					<view class="active-item-left">
 						<image class="active-icon" src="https://qs.shideng-inc.com/static/xcximg/me_menu_3@2x.png"></image>
 						<view>分享有礼</view>
