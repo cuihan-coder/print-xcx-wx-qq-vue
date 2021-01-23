@@ -141,7 +141,7 @@ page {
 		top: 0;
 		left: 0;
 		width: 100%;
-		height: 500upx;
+		height: 430upx;
 		image {
 			width: 100%;
 			height: 100%;
@@ -150,7 +150,7 @@ page {
 	& .scroll-view {
 		overflow-y: scroll;
 		position: fixed;
-		top: 468upx;
+		top: 395upx;
 		bottom: 100upx;
 		left: 0;
 		width: calc(100% - 80upx);

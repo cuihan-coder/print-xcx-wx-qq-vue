@@ -37,7 +37,7 @@ export default {
 	},
 	data: () => ({
 		//颜色 1 彩色 0 黑白
-		color: 0,
+		color: 1,
 		//单双面 1 双面 0 单面
 		sides: 0,
 		//打印份数

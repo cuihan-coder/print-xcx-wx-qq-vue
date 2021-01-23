@@ -54,8 +54,7 @@ export default {
 			log:[]
 		};
 	},
-	async onLoad() {
-		
+	async onShow(){
 		let ret = await this.$helper.httpGet(this.$api.topupInfo_url_get)
 		if(ret.state == 'success'){
 			this.log = ret.data.log

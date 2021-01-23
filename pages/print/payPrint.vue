@@ -158,6 +158,7 @@ export default {
 				duration:3000
 			});
 			if(ret.state == 'success' && that.default_pay == 'balance'){
+				uni.$off('paySub')
 				uni.navigateTo({
 					url:'/pages/print/payOk'
 				})
@@ -166,6 +167,7 @@ export default {
 				// #ifdef MP-WEIXIN
 				let state = await payModel.wxPay(ret.data)
 				if(state == true){
+					uni.$off('paySub')
 					uni.navigateTo({
 						url:'/pages/print/payOk'
 					})
@@ -176,6 +178,7 @@ export default {
 				  url:ret.data.mweb_url,
 				  referer: ret.data.referer,
 				  success(res) {
+					  uni.$off('paySub')
 					  uni.navigateTo({
 					  	url:'/pages/print/payOk'
 					  })
@@ -200,10 +203,6 @@ export default {
 			})
 			let ret = await this.$helper.httpGet(this.$api.payOrderInfo_url_get+query);
 			if (ret.state == 'success') {
-				uni.showToast({
-					title: ret.msg,
-					icon: 'none'
-				});
 				this.voucherList = ret.data.voucherList;
 				this.balance = ret.data.balance;
 				this.default_pay = ret.data.default_pay

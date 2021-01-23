@@ -1,5 +1,10 @@
 {
     "name" : "qswy",
+	"networkTimeout": {
+		"request":60000,
+		"uploadFile":200000,
+		"downloadFile":200000
+	},
     "appid" : "__UNI__F0D041B",
     "description" : "",
     "versionName" : "1.0.0",

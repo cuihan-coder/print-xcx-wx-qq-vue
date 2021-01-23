@@ -24,7 +24,7 @@ export default {
 	data() {
 		return {
 			showParam: [1, 3],
-			color: 1,
+			color: 0,
 			printNum: 1,
 			orderMoney: 0,
 			pageNums: 0,
@@ -56,6 +56,9 @@ export default {
 		});
 		//打印参数变动
 		uni.$on('picPrintParamChange', async function(data) {
+			if(!that.imgUrl){
+				return
+			}
 			that[data.field] = data.val;
 			//加载价格
 			let postData = {

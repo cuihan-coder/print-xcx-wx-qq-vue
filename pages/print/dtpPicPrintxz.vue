@@ -26,7 +26,7 @@
 <script>
 import scanEquipment from '../../components/scanEquipment.vue';
 import footerCount from '../../components/footerCount.vue';
-import printParam from '../../components/printParam.vue';
+import printParam from '../../components/printParamXp.vue';
 import singlePicUp from '../../components/singlePicUp.vue';
 export default {
 	components: {

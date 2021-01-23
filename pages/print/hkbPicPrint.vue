@@ -22,7 +22,7 @@ export default {
 	data() {
 		return {
 			showParam: [1, 3],
-			color: 1,
+			color: 0,
 			imgUrl:'',
 			printNum: 1, //打印份数
 			orderMoney: 0,
@@ -49,6 +49,9 @@ export default {
 		})
 		
 		uni.$on('picPrintParamChange', async function(data) {
+			if(!that.imgUrl){
+				return
+			}
 			that[data.field] = data.val;
 			//加载价格
 			let postData = {
@@ -61,6 +64,7 @@ export default {
 		});
 		//提交订单
 		uni.$on('subOrder', async function() {
+			uni.$off('subOrder')
 			if (that.is_subing == 1) {
 				return;
 			}

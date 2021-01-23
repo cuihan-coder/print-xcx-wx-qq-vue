@@ -89,7 +89,7 @@
 				</view>
 				<view class="show" v-if="item.is_open == false" @click="taskList[index].is_open = true">
 					<image class="jt" src="https://qs.shideng-inc.com/static/xcximg/file_display@2x.png"></image>
-					展开
+					打印设置
 				</view>
 			</view>
 		</view>
@@ -136,10 +136,11 @@ export default {
 		this.taskList = ret.data;
 		let that = this
 		uni.$on('subOrder',async function(){
+			
 			if(that.is_subing == 1){
 				return
 			}
-			
+			console.log(that.taskIds.length)
 			if(that.taskIds.length == 0){
 				uni.showToast({
 					title: '请选择打印的文档',
@@ -153,6 +154,7 @@ export default {
 			let device_code = that.$store.state.deviceCode
 			let ret = await that.$helper.httpPost(that.$api.addMainOrder_url_post,{taskIds:that.taskIds,device_code})
 			if(ret.state == 'success'){
+				uni.$off('subOrder')
 				uni.showToast({
 					title: ret.msg,
 					icon:'none'

@@ -38,7 +38,7 @@ export default {
 	data() {
 		return {
 			showParam: [1, 3],
-			color: 1,
+			color: 0,
 			//上传的图片列表
 			imgSrcs: [],
 			printNum: 1, //打印份数

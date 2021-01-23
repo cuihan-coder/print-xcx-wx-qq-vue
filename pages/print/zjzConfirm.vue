@@ -30,7 +30,7 @@ export default {
 		return {
 			is_subing:0,
 			showParam: [1, 3],
-			color:'',
+			color:0,
 			printType:{},
 			imgUrl:'',
 			sinPic:'',
@@ -48,6 +48,7 @@ export default {
 		this.uploadImgbeautify(this.imgUrl,this.color,this.printType.size)
 		let that = this
 		uni.$on('subOrder',async function(){
+			
 			if(that.is_subing == 1){
 				return
 			}
@@ -55,6 +56,7 @@ export default {
 			let device_code = that.$store.state.deviceCode
 			let ret = await that.$helper.httpPost(that.$api.addMainOrder_url_post,{taskIds:[that.taskId],device_code})
 			if(ret.state == 'success'){
+				uni.$off('subOrder')
 				uni.showToast({
 					title: ret.msg,
 					icon:'none',

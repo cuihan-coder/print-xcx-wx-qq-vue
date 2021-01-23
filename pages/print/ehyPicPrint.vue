@@ -43,7 +43,7 @@ export default {
 	data() {
 		return {
 			showParam: [1, 3],
-			color: 1,
+			color: 0,
 			zmImg:'',
 			fmImg:'',
 			printNum: 1, //打印份数
@@ -57,6 +57,9 @@ export default {
 	async onLoad() {
 		let that = this;
 		uni.$on('picPrintParamChange', async function(data) {
+			if(!that.zmImg){
+				return
+			}
 			that[data.field] = data.val;
 			//加载价格
 			let postData = {
@@ -69,6 +72,7 @@ export default {
 		});
 		//提交订单
 		uni.$on('subOrder', async function() {
+			
 			if (that.is_subing == 1) {
 				return;
 			}
@@ -104,6 +108,7 @@ export default {
 			let device_code = that.$store.state.deviceCode;
 			let ret = await that.$helper.httpPost(that.$api.addMainOrder_url_post, { taskIds: [that.taskId], device_code });
 			if (ret.state == 'success') {
+				uni.$off('subOrder')
 				uni.showToast({
 					title: ret.msg,
 					icon: 'none',

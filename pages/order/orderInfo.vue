@@ -21,7 +21,7 @@
 				<!-- 	<text class="clz">处理中</text> -->
 				<!-- 	<text class="tksb">退款失败</text> -->
 				<text v-if="info.is_print == 1" class="ydy">已打印</text>
-				<text v-if="info.is_print == 0 && info.is_pay == 1" class="ddy">待打印</text>
+				<text v-if="info.is_print == 0 && info.is_pay == 1 && info.is_tk == 0" class="ddy">待打印</text>
 				<text v-if="info.is_pay == 0 "  class="dzf">待支付</text>
 				<text  v-if="info.is_pay == 1 && info.is_tk == 1" class="clz">处理中</text>
 				<text  v-if="info.is_pay == 1 && info.is_tk == 3"  class="tksb">退款失败</text>
@@ -123,11 +123,17 @@ page {
 			padding-bottom: 45upx;
 			border-bottom: 2upx solid $color-f1;
 			& .print-name-1 {
+				width: 80%;
+				white-space: nowrap;
+				overflow-y: hidden;
+				text-overflow: ellipsis;
 				@include item-center;
 				image {
 					@include w-h(56upx, 56upx);
+					flex-shrink:0;
+					padding-right: 10upx;
 				}
-				@include font-no-height(30, 500, $color-33);
+				@include font-no-height(30upx, 500, $color-33);
 			}
 			//已打印
 			& .ydy {

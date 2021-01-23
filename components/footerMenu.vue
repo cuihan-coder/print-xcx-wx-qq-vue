@@ -77,21 +77,25 @@ export default {
 	.menu-icon {
 		display: grid;
 		align-content: center;
+		justify-items: center;
 		height: 100%;
 		image {
 			@include w-h(39upx, 39upx);
 		}
 		view {
-			@include font-no-height(20upx, 400, $color-00);
+			@include font-no-height(30upx, 400, $color-00);
 		}
 	}
 	.menu-center {
+		display: grid;
+		align-content: center;
+		justify-items: center;
 		margin-top: -40upx;
 		image {
 			@include w-h(84upx, 84upx);
 		}
 		view {
-			@include font-no-height(20upx, 400, $color-00);
+			@include font-no-height(30upx, 400, $color-00);
 		}
 	}
 }

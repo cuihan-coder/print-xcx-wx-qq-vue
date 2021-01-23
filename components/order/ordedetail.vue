@@ -1,7 +1,7 @@
 <template>
 	<view class="order-infos" @click="toPage('/pages/order/orderInfo?taskId='+taskId)">
 		<view class="type-img">
-			<view>
+			<view class="title-name">
 				<!-- pptx -->
 				<image v-if="file_ext == 'pptx' || file_ext == 'ppt'" class="img-icon" src="https://qs.shideng-inc.com/static/xcximg/file_ppt@2x.png"></image>
 				<!-- xlsx -->
@@ -15,7 +15,7 @@
 				{{file_name}}
 			</view>
 			<text v-if="is_print == 1" class="ydy">已打印</text>
-			<text v-if="is_print == 0 && is_pay == 1" class="ddy">待打印</text>
+			<text v-if="is_print == 0 && is_pay == 1 && is_tk == 0" class="ddy">待打印</text>
 			<text v-if="is_pay == 0 "  class="dzf">待支付</text>
 			<text  v-if="is_pay == 1 && is_tk == 1" class="clz">处理中</text>
 			<text  v-if="is_pay == 1 && is_tk == 3"  class="tksb">退款失败</text>
@@ -101,6 +101,15 @@
 				@include w-h(55upx, 55upx);
 				padding-right: 10upx;
 			}
+		}
+		& .title-name{
+			& image{
+				flex-shrink:0;
+			}
+			width: 80%;
+			white-space: nowrap;
+			overflow-y: hidden;
+			text-overflow: ellipsis;
 		}
 		//已打印
 		& .ydy {

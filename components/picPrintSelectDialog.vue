@@ -50,7 +50,7 @@ export default {
 	& .orange-back {
 		position: absolute;
 		left: 231upx;
-		bottom: 179upx;
+		bottom: 279upx;
 		@include w-h(180upx, 180upx);
 		display: grid;
 		justify-content: center;
@@ -70,7 +70,7 @@ export default {
 	& .blue-back {
 		position: absolute;
 		right: 113upx;
-		bottom: 357upx;
+		bottom: 457upx;
 		@include w-h(180upx, 180upx);
 		display: grid;
 		justify-content: center;
