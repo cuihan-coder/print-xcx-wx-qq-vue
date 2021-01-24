@@ -146,7 +146,7 @@ export default {
 								uni.showToast({
 									title: uploadFileRes.msg,
 									icon: 'none',
-									duration:3000
+									duration:2000
 								});
 								that.imgSrc = uploadFileRes.data[0];
 								//图片成功传递url

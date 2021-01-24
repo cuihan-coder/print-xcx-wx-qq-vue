@@ -155,7 +155,7 @@ export default {
 			uni.showToast({
 				title: ret.msg,
 				icon: 'none',
-				duration:3000
+				duration:2000
 			});
 			if(ret.state == 'success' && that.default_pay == 'balance'){
 				uni.$off('paySub')

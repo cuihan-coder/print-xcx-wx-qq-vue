@@ -74,7 +74,7 @@ export default {
 			if(ret.state == 'success'){
 				uni.showToast({
 					title:ret.msg,
-					duration:3000,
+					duration:2000,
 					icon:'none'
 				})
 			}
@@ -103,7 +103,7 @@ export default {
 								uni.showToast({
 									title: uploadFileRes.msg,
 									icon: 'none',
-									duration:3000
+									duration:2000
 								});
 								that.imgUrl.push(uploadFileRes.data[0])
 								return;

@@ -78,7 +78,7 @@ export default {
 				that.list.splice(orderlistIndex, 1)
 				uni.showToast({
 					title:ret.msg,
-					duration:3000,
+					duration:2000,
 					icon:'none'
 				})
 			}
@@ -120,7 +120,7 @@ export default {
 				if(ret.data.length == 0 && this.page > 1){
 					uni.showToast({
 						title:'记录没有了',
-						duration:3000,
+						duration:2000,
 						icon:'none'
 					})
 					return

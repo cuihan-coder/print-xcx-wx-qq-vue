@@ -26,7 +26,7 @@ const helper = {
 					uni.showToast({
 						title: '系统请求错误',
 						icon: 'none',
-						duration:3000
+						duration:2000
 					})
 				}
 			})

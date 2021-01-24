@@ -67,9 +67,9 @@
 					<view class="where-container-row-1-left top-height">
 						<view class="where-container-row-1-left-1">页面</view>
 						<view class="page-num-set">
-							<input class="min-page" @input="changeFilter(index, 'start_page', item.start_page)" v-model="item.start_page" />
+							<input class="min-page" type="number" @input="changeFilter(index, 'start_page', item.start_page)" v-model="item.start_page" />
 							<view class="zhi">至</view>
-							<input class="max-page" @input="changeFilter(index, 'end_page', item.end_page)" v-model="item.end_page" />
+							<input class="max-page"  type="number"  @input="changeFilter(index, 'end_page', item.end_page)" v-model="item.end_page" />
 						</view>
 					</view>
 					<view class="where-container-row-1-rfight top-height">
@@ -145,7 +145,7 @@ export default {
 				uni.showToast({
 					title: '请选择打印的文档',
 					icon:'none',
-					duration:3000
+					duration:2000
 				})
 				return
 			}
@@ -203,18 +203,18 @@ export default {
 				uni.showToast({
 					title: '当前页码过大',
 					icon: 'none',
-					duration:3000
+					duration:2000
 				});
 				return;
 			}
-			if (field == 'start_page' && val == '') {
+			if (['start_page','end_page'].indexOf(field) != -1 && [0,''].indexOf(val) != -1) {
 				return;
 			}
 			if (field == 'start_page' && (this.taskList[index][field] > this.taskList[index]['file_pages'] || this.taskList[index][field] < 1)) {
 				uni.showToast({
 					title: '当前页码过大或过小',
 					icon: 'none',
-					duration:3000
+					duration:2000
 				});
 				return;
 			}
@@ -273,14 +273,14 @@ export default {
 						uni.showToast({
 							title: uploadFileRes.msg,
 							icon: 'none',
-							duration:3000
+							duration:2000
 						});
 						return;
 					}
 					uni.showToast({
 						title: '上传失败',
 						icon: 'none',
-						duration:3000
+						duration:2000
 					});
 				}
 			});
@@ -292,7 +292,7 @@ export default {
 				uni.showToast({
 					title: '请扫码，再上传',
 					icon: 'none',
-					duration:3000
+					duration:2000
 				});	
 				return
 			}
@@ -541,8 +541,8 @@ page {
 	}
 	& .xuanfu-img {
 		position: fixed;
-		right: 40upx;
-		bottom: 238upx;
+		right: 0upx;
+		bottom: 284upx;
 		@include w-h(120upx, 120upx);
 	}
 

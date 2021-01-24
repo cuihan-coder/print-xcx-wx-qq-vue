@@ -83,7 +83,7 @@ export default {
 			@include w-h(39upx, 39upx);
 		}
 		view {
-			@include font-no-height(30upx, 400, $color-00);
+			@include font-no-height(25upx, 400, $color-00);
 		}
 	}
 	.menu-center {
@@ -95,7 +95,7 @@ export default {
 			@include w-h(84upx, 84upx);
 		}
 		view {
-			@include font-no-height(30upx, 400, $color-00);
+			@include font-no-height(25upx, 400, $color-00);
 		}
 	}
 }

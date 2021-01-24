@@ -50,7 +50,7 @@ export default {
 				uni.showToast({
 					title: '请填写内容',
 					icon: 'none',
-					duration:3000
+					duration:2000
 				});
 				return
 			}
@@ -59,7 +59,7 @@ export default {
 				uni.showToast({
 					title: ret.msg,
 					icon: 'none',
-					duration:3000
+					duration:2000
 				});
 			}
 		}

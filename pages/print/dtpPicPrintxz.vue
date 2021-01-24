@@ -12,7 +12,7 @@
 					<image @click="imgSrcs.splice(index, 1)" class="cha" src="https://qs.shideng-inc.com/static/xcximg/certificates_del_s@2x.png"></image>
 					<image class="img" :src="item"></image>
 				</view>
-				<view v-if="imgSrcs.length <= 9" @click="uploadPic()" class="add-file-img">
+				<view v-if="imgSrcs.length < 9" @click="uploadPic()" class="add-file-img">
 					<view>+</view>
 					<view>点击添加</view>
 				</view>
@@ -45,7 +45,7 @@ export default {
 			orderMoney: 0,
 			pageNums: 0, //面数
 			is_subing: 0,
-			taskId: []
+			taskId: [],
 		};
 	},
 	computed: {
@@ -130,9 +130,6 @@ export default {
 				sizeType: ['original'], //可以指定是原图还是压缩图，默认二者都有
 				sourceType: ['album', 'camera'], //从相册选择
 				success: async function(res) {
-					uni.showLoading({
-						title: '文件上传中,太多文件可能上传时间较长'
-					});
 					for (let tmpUrl of res.tempFilePaths) {
 						//上传文件到后台
 						await uni.uploadFile({
@@ -158,10 +155,12 @@ export default {
 			});
 		},
 		async getPrice(that, postData) {
+			this.is_subing = 1
 			let ret = await that.$helper.httpPost(that.$api.changeParamPrice_url_post, postData);
 			if (ret.state == 'success') {
 				that.orderMoney = ret.data.price;
 				that.pageNums = ret.data.printNum;
+				this.is_subing = 0
 			}
 		}
 	}

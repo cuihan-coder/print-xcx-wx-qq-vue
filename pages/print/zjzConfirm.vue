@@ -60,7 +60,7 @@ export default {
 				uni.showToast({
 					title: ret.msg,
 					icon:'none',
-					duration:3000
+					duration:2000
 				})
 				uni.navigateTo({
 					url:"/pages/print/payPrint?main_id=" + ret.data.main_id
@@ -84,7 +84,7 @@ export default {
 			uni.showToast({
 				title: ret.msg,
 				icon:'none',
-				duration:3000
+				duration:2000
 			})
 			if(ret.state == 'success'){
 				this.sinPic = ret.data.sinPic

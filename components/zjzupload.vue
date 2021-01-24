@@ -70,7 +70,7 @@ export default {
 								uni.showToast({
 									title: uploadFileRes.msg,
 									icon: 'none',
-									duration:3000
+									duration:2000
 								});
 								that.$store.commit('zjzprint/SET_IMGURL',uploadFileRes.data[0])
 								uni.navigateTo({

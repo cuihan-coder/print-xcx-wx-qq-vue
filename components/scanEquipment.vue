@@ -91,7 +91,7 @@ export default {
 						uni.showToast({
 							title: ret.msg,
 							icon: 'none',
-							duration:3000
+							duration:2000
 						});
 					}
 				}
